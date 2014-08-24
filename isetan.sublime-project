@@ -1,0 +1,21 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "/Users/tatsuyanoheya/dig_site/crevo-1708c76bfa"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/Users/tatsuyanoheya/dig_site/rspec_rails_4"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/Users/tatsuyanoheya/dig_site/crevo"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "."
+		}
+	]
+}
