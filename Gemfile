@@ -30,6 +30,7 @@ group :production, :staging do
 end
 
 group :development do
+  gem 'erb2haml'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry', group: :test
