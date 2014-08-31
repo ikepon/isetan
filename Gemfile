@@ -20,9 +20,10 @@ end
 group :test do
   gem 'faker'
   gem 'capybara'
+  gem 'capybara-screenshot'
+  gem 'poltergeist'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'selenium-webdriver'
 end
 
 group :production, :staging do
