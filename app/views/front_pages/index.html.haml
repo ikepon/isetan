@@ -10,44 +10,87 @@
   .row
     #contents
       .col-md-8
-        %h2.content-headline Hot Books
-        .col-md-4
-          %h3.content-title Hot No1
-          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-          %p
-            %a{class: "btn btn-default", href: "#", role: "button"}
-              View details &raquo;
-        .col-md-4
-          %h3.content-title Hot No2
-          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-          %p
-            %a{class: "btn btn-default", href: "#", role: "button"}
-              View details &raquo;
-        .col-md-4
-          %h3.content-title Hot No3
-          %p Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-          %p
-            %a{class: "btn btn-default", href: "#", role: "button"}
-              View details &raquo;
-        %h2.content-headline New Books
-        .col-md-4
-          %h3.content-title New No1
-          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-          %p
-            %a{class: "btn btn-default", href: "#", role: "button"}
-              View details &raquo;
-        .col-md-4
-          %h3.content-title New No2
-          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-          %p
-            %a{class: "btn btn-default", href: "#", role: "button"}
-              View details &raquo;
-        .col-md-4
-          %h3.content-title New No3
-          %p Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-          %p
-            %a{class: "btn btn-default", href: "#", role: "button"}
-              View details &raquo;
+        .row
+          .col-sm-6.book-box
+            .row
+              %span.label.label-danger.tagclip Hot
+              .col-xs-6
+                = image_tag "agile_rails.jpeg", width: "150px"
+              .col-xs-6
+                %h3.content-title Hot No1
+                %p ★★★☆☆
+                %span.glyphicon.glyphicon-user
+                isetan man
+                %br
+                %span.glyphicon.glyphicon-heart-empty
+                3
+                　
+                %span.glyphicon.glyphicon-pencil
+                5
+            %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+            %p
+              %a{class: "btn btn-default", href: "#", role: "button"}
+                View details &raquo;
+          .col-sm-6.book-box
+            .row
+              %span.label.label-danger.tagclip Hot
+              .col-xs-6
+                = image_tag "agile_rails.jpeg", width: "150px"
+              .col-xs-6
+                %h3.content-title Hot No2
+                %p ★★★☆☆
+                %span.glyphicon.glyphicon-user
+                isetan man
+                %br
+                %span.glyphicon.glyphicon-heart-empty
+                3
+                　
+                %span.glyphicon.glyphicon-pencil
+                5
+            %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+            %p
+              %a{class: "btn btn-default", href: "#", role: "button"}
+                View details &raquo;
+          .col-sm-6.book-box
+            .row
+              %span.label.label-warning.tagclip New
+              .col-xs-6
+                = image_tag "agile_rails.jpeg", width: "150px"
+              .col-xs-6
+                %h3.content-title New No1
+                %p ★★★☆☆
+                %span.glyphicon.glyphicon-user
+                isetan man
+                %br
+                %span.glyphicon.glyphicon-heart-empty
+                3
+                　
+                %span.glyphicon.glyphicon-pencil
+                5
+            %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+            %p
+              %a{class: "btn btn-default", href: "#", role: "button"}
+                View details &raquo;
+          .col-sm-6.book-box
+            .row
+              %span.label.label-warning.tagclip New
+              .col-xs-6
+                = image_tag "agile_rails.jpeg", width: "150px"
+              .col-xs-6
+                %h3.content-title New No2
+                %p ★★★☆☆
+                %span.glyphicon.glyphicon-user
+                isetan man
+                %br
+                %span.glyphicon.glyphicon-heart-empty
+                3
+                　
+                %span.glyphicon.glyphicon-pencil
+                5
+            %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+            %p
+              %a{class: "btn btn-default", href: "#", role: "button"}
+                View details &raquo;
     #sidebar
       .col-md-4
         %h3.content-title News

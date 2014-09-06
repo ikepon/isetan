@@ -1,3 +1,8 @@
+// container
+.container {
+  background-color: white;
+}
+
 // nav
 .navbar {
   background: white;
@@ -6,4 +11,32 @@
   a {
     color: darkslategray;
   }
+}
+
+// content
+.contents-area {
+  .book-box {
+    margin-bottom: 40px;
+  }
+  h2 {
+    margin-left: 15px;
+  }
+  .content-title {
+    margin-top: 0px;
+  }
+  .tagclip {
+    float: left;
+    position: relative;
+    z-index: 1;
+    vertical-align: middle;
+    margin: -10px 0 -20px 0px;
+    font-size: 20px;
+  }
+}
+
+// footer
+footer {
+  background-color: white;
+  margin-top: 10px;
+  padding: 15px;
 }

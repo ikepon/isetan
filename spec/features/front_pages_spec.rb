@@ -23,15 +23,11 @@ feature "トップページ" do
     end
 
     scenario "メイン領域に必要コンテンツが表示されている" do
-      expect(page).to have_css('.content-headline', text: 'Hot Books')
       expect(page).to have_css('.content-title', text: 'Hot No1')
       expect(page).to have_css('.content-title', text: 'Hot No2')
-      expect(page).to have_css('.content-title', text: 'Hot No3')
 
-      expect(page).to have_css('.content-headline', text: 'New Books')
       expect(page).to have_css('.content-title', text: 'New No1')
       expect(page).to have_css('.content-title', text: 'New No2')
-      expect(page).to have_css('.content-title', text: 'New No3')
     end
 
     scenario "サイドバー領域に必要コンテンツが表示されている" do
