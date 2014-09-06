@@ -31,13 +31,14 @@
             %li
               %a{href: "#login"} Login
         / /.nav-collapse
-    .container
+    .container.contents-area
       = yield
     / /.container
-    %hr
-
     %footer
-      %p &copy; Company 2014
-      %p=link_to 'サイトについて', '/'
-      %p=link_to 'お問合せ', '/'
-      %p=link_to '運営者', '/'
+      %p.text-center
+        &copy; isetan 2014　|　
+        =link_to 'サイトについて', '/'
+        　|　
+        =link_to 'お問合せ', '/'
+        　|　
+        =link_to '運営者', '/'
