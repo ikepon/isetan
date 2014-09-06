@@ -18,20 +18,24 @@ feature "トップページ" do
       expect(page).to have_css('ul.nav.navbar-nav li', text: 'Login')
     end
 
-    scenario "メイン領域に必要コンテンツが表示されている" do
-      expect(page).to have_css('h2', text: 'Hot Books')
-      expect(page).to have_css('.col-md-4', text: 'Hot No1')
-      expect(page).to have_css('.col-md-4', text: 'Hot No2')
-      expect(page).to have_css('.col-md-4', text: 'Hot No3')
+    scenario "メインビューが表示されている" do
+      expect(page).to have_css('.view-title', text: '蔵書管理 isetan')
+    end
 
-      expect(page).to have_css('h2', text: 'New Books')
-      expect(page).to have_css('.col-md-4', text: 'New No1')
-      expect(page).to have_css('.col-md-4', text: 'New No2')
-      expect(page).to have_css('.col-md-4', text: 'New No3')
+    scenario "メイン領域に必要コンテンツが表示されている" do
+      expect(page).to have_css('.content-headline', text: 'Hot Books')
+      expect(page).to have_css('.content-title', text: 'Hot No1')
+      expect(page).to have_css('.content-title', text: 'Hot No2')
+      expect(page).to have_css('.content-title', text: 'Hot No3')
+
+      expect(page).to have_css('.content-headline', text: 'New Books')
+      expect(page).to have_css('.content-title', text: 'New No1')
+      expect(page).to have_css('.content-title', text: 'New No2')
+      expect(page).to have_css('.content-title', text: 'New No3')
     end
 
     scenario "サイドバー領域に必要コンテンツが表示されている" do
-      expect(page).to have_css('h3', text: 'News')
+      expect(page).to have_css('.content-title', text: 'News')
     end
 
     scenario "フッター領域に必要コンテンツが表示されている" do

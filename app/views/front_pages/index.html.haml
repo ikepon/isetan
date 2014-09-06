@@ -1,6 +1,6 @@
 .jumbotron
   .container
-    %h1 Hello, world!
+    %h2.view-title 蔵書管理 isetan
     %p This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.
     %p
 
@@ -8,45 +8,47 @@
         Learn more &raquo;
 .container
   .row
-    .col-md-8
-      %h2 Hot Books
+    #contents
+      .col-md-8
+        %h2.content-headline Hot Books
+        .col-md-4
+          %h3.content-title Hot No1
+          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+          %p
+            %a{class: "btn btn-default", href: "#", role: "button"}
+              View details &raquo;
+        .col-md-4
+          %h3.content-title Hot No2
+          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+          %p
+            %a{class: "btn btn-default", href: "#", role: "button"}
+              View details &raquo;
+        .col-md-4
+          %h3.content-title Hot No3
+          %p Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+          %p
+            %a{class: "btn btn-default", href: "#", role: "button"}
+              View details &raquo;
+        %h2.content-headline New Books
+        .col-md-4
+          %h3.content-title New No1
+          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+          %p
+            %a{class: "btn btn-default", href: "#", role: "button"}
+              View details &raquo;
+        .col-md-4
+          %h3.content-title New No2
+          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+          %p
+            %a{class: "btn btn-default", href: "#", role: "button"}
+              View details &raquo;
+        .col-md-4
+          %h3.content-title New No3
+          %p Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+          %p
+            %a{class: "btn btn-default", href: "#", role: "button"}
+              View details &raquo;
+    #sidebar
       .col-md-4
-        %h3 Hot No1
+        %h3.content-title News
         %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        %p
-          %a{class: "btn btn-default", href: "#", role: "button"}
-            View details &raquo;
-      .col-md-4
-        %h3 Hot No2
-        %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        %p
-          %a{class: "btn btn-default", href: "#", role: "button"}
-            View details &raquo;
-      .col-md-4
-        %h3 Hot No3
-        %p Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-        %p
-          %a{class: "btn btn-default", href: "#", role: "button"}
-            View details &raquo;
-      %h2 New Books
-      .col-md-4
-        %h3 New No1
-        %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        %p
-          %a{class: "btn btn-default", href: "#", role: "button"}
-            View details &raquo;
-      .col-md-4
-        %h3 New No2
-        %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        %p
-          %a{class: "btn btn-default", href: "#", role: "button"}
-            View details &raquo;
-      .col-md-4
-        %h3 New No3
-        %p Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-        %p
-          %a{class: "btn btn-default", href: "#", role: "button"}
-            View details &raquo;
-    .col-md-4
-      %h3 News
-      %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
