@@ -1,0 +1,19 @@
+-if @user.errors.any?
+  .alert.alert-danger
+    %ul
+      - @user.errors.full_messages.each do |msg|
+        %lu= msg
+= form_for @user do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control', placeholder: '山田 太郎'
+  .form-group
+    = f.label :email
+    = f.text_field :email, class: 'form-control', placeholder: 'user@example.com'
+  .form-group
+    = f.label :password_digest
+    = f.password_field :password_digest, class: 'form-control'
+  .form-group
+    = f.label :profile
+    = f.text_area :profile, class: 'form-control', placeholder: '普段は技術書を読んでいますが、ビジネス系の本も興味があります。'
+  = f.submit '保存する', class: 'btn btn-default'

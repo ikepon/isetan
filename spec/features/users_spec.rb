@@ -38,11 +38,21 @@ feature "User ページ" do
 
         expect(page).to have_css('h2', "ユーザ一覧")
       end
+
+      scenario "プロフィール編集が面に遷移すること" do
+        click_on 'プロフィールを編集する'
+
+        expect(page).to have_css('h2', text: "プロフィール編集")
+      end
     end
 
     context "ユーザ編集ページ" do
       background do
         visit edit_user_path(user)
+      end
+
+      scenario "ユーザの編集画面が表示されいてる" do
+        expect(page).to have_css('h2', text: "プロフィール編集")
       end
     end
   end
