@@ -23,7 +23,7 @@ feature "User ページ" do
       expect(page).to have_css('h2', text: "プロフィール")
     end
 
-    context "ユーザー詳細ページ" do
+    context "ユーザ詳細ページ" do
       background do
         visit user_path(user)
       end
@@ -33,6 +33,17 @@ feature "User ページ" do
         expect(page).to have_css('.user-profile', text: "#{user.profile}")
       end
 
+      scenario "ユーザ一覧に戻るボタンを押すとユーザ一覧ページに遷移する" do
+        click_on 'ユーザ一覧に戻る'
+
+        expect(page).to have_css('h2', "ユーザ一覧")
+      end
+    end
+
+    context "ユーザ編集ページ" do
+      background do
+        visit edit_user_path(user)
+      end
     end
   end
 end
