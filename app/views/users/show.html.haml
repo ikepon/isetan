@@ -1,0 +1,18 @@
+.container
+  .row
+    #contents
+      .col-md-8
+        .row
+          %h2 プロフィール
+          %table.table
+            %tbody
+              %tr
+                %th ユーザ名
+                %td.user-name= @user.name
+              %tr
+                %th 自己紹介
+                %td.user-profile= @user.profile
+    #sidebar
+      .col-md-4
+        %h3.content-title News
+        %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
