@@ -4,6 +4,7 @@
       .col-md-8
         .row
           %h2 プロフィール
+          = image_tag @user.image.url, width: '70px'
           %table.table
             %tbody
               %tr

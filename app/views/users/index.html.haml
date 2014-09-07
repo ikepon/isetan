@@ -14,7 +14,12 @@
               - if @users
                 - @users.each do |user|
                   %tr
-                    %td.user-id= user.id
+                    %td.user-id
+                      = user.id
+                      - if user.image?
+                        = image_tag user.image.thumb.url
+                      - else
+                        = image_tag 'noimage.gif'
                     %td.user-name= user.name
                     %td.user-profile= link_to 'プロフィールへ', user_path(user)
               - else
