@@ -19,7 +19,7 @@
                       - if user.image?
                         = image_tag user.image.thumb.url
                       - else
-                        = image_tag 'noimage.gif'
+                        = image_tag 'noimage.jpg', size: '50x50'
                     %td.user-name= user.name
                     %td.user-profile= link_to 'プロフィールへ', user_path(user)
               - else
