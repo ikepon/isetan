@@ -15,7 +15,9 @@
     = f.password_field :password_digest, class: 'form-control'
   .form-group
     = f.label :image
+    = image_tag @user.image.thumb.url if @user.image?
     = f.file_field :image
+    = f.hidden_field :image_cache
     %p.help-block ※アップロードするファイルはjpg,jpeg,gif,pngのいずれかにしてください。
   .form-group
     = f.label :profile
