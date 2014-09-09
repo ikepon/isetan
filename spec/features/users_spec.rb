@@ -54,6 +54,27 @@ feature "User ページ" do
       scenario "ユーザの編集画面が表示されいてる" do
         expect(page).to have_css('h2', text: "プロフィール編集")
       end
+
+      scenario "ユーザ名が未記入の場合、画面が遷移しない" do
+        fill_in 'user[name]', with: ""
+        click_on '保存する'
+
+        expect(page).to have_css('h2', text: "プロフィール編集")
+      end
+
+      scenario "emailが未記入の場合、画面が遷移しない" do
+        fill_in 'user[email]', with: ""
+        click_on '保存する'
+
+        expect(page).to have_css('h2', text: "プロフィール編集")
+      end
+
+      scenario "passwordが未記入の場合、画面が遷移しない" do
+        fill_in 'user[password_digest]', with: ""
+        click_on '保存する'
+
+        expect(page).to have_css('h2', text: "プロフィール編集")
+      end
     end
   end
 end
