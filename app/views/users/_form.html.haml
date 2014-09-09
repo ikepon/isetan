@@ -6,13 +6,13 @@
 = form_for @user do |f|
   .form-group
     = f.label :name
-    = f.text_field :name, class: 'form-control', placeholder: '山田 太郎'
+    = f.text_field :name, class: 'form-control', required: true, placeholder: '山田 太郎'
   .form-group
     = f.label :email
-    = f.text_field :email, class: 'form-control', placeholder: 'user@example.com'
+    = f.text_field :email, class: 'form-control', required: true, placeholder: 'user@example.com'
   .form-group
     = f.label :password_digest
-    = f.password_field :password_digest, class: 'form-control'
+    = f.password_field :password_digest, class: 'form-control', required: true
   .form-group
     = f.label :image
     = image_tag @user.image.thumb.url if @user.image?
