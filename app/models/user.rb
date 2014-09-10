@@ -4,8 +4,10 @@ class User < ActiveRecord::Base
   with_options presence: true do |required|
     required.validates :name, length: { maximum: 50 }
     required.validates :email, uniqueness: { case_sensitive: false }
-    required.validates :password_digest
+    required.validates :password_digest, length: { minimum: 6 }
   end
 
   mount_uploader :image, ImageUploader
+
+  has_secure_password
 end
