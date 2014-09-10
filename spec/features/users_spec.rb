@@ -55,25 +55,14 @@ feature "User ページ" do
         expect(page).to have_css('h2', text: "プロフィール編集")
       end
 
-      scenario "ユーザ名が未記入の場合、画面が遷移しない" do
-        fill_in 'user[name]', with: ""
+      scenario "ユーザ名が51文字以上の場合、画面が遷移せず、エラーメッセージが表示される" do
+        fill_in 'user[name]', with: "a" * 51
+        fill_in 'user[email]', with: "user@example.com"
+        fill_in 'user[password_digest]', with: "a" * 10
         click_on '保存する'
 
         expect(page).to have_css('h2', text: "プロフィール編集")
-      end
-
-      scenario "emailが未記入の場合、画面が遷移しない" do
-        fill_in 'user[email]', with: ""
-        click_on '保存する'
-
-        expect(page).to have_css('h2', text: "プロフィール編集")
-      end
-
-      scenario "passwordが未記入の場合、画面が遷移しない" do
-        fill_in 'user[password_digest]', with: ""
-        click_on '保存する'
-
-        expect(page).to have_css('h2', text: "プロフィール編集")
+        expect(page).to have_css('.alert', text: "Name is too long (maximum is 50 characters)")
       end
     end
   end
