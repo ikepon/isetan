@@ -1,28 +1,11 @@
 require 'spec_helper'
 
-feature 'ユーザー作成、ログイン、ログアウト' do
-  context 'ユーザー作成する' do
-    before do
-      visit signup_path
-    end
-
-    scenario '新規ユーザーの作成' do
-      fill_in 'user[name]', with: 'test user'
-      fill_in 'user[email]', with: 'test@example.com'
-      fill_in 'user[password]', with: 'password'
-      fill_in 'user[password_confirmation]', with: 'password'
-      click_on '登録する'
-
-      expect(page).to have_css('h2', text: 'プロフィール')
-      expect(page).to have_css('.user-name', text: 'test user')
-    end
-  end
-
+feature 'ログイン、ログアウト' do
   context 'ログインする' do
     let!(:user) { create(:user) }
 
     before do
-      visit login_path
+      visit new_user_path
     end
 
     scenario '正しい情報を入れるとログインできる' do
