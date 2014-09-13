@@ -9,9 +9,9 @@ feature 'ユーザー作成、ログイン、ログアウト' do
     scenario '新規ユーザーの作成' do
       fill_in 'user[name]', with: 'test user'
       fill_in 'user[email]', with: 'test@example.com'
-      fill_in 'user[password_digest]', with: 'password'
-      fill_in 'user[password_confirmation', with: 'password'
-      click_on 'ユーザーを作成する'
+      fill_in 'user[password]', with: 'password'
+      fill_in 'user[password_confirmation]', with: 'password'
+      click_on '登録する'
 
       expect(page).to have_css('h2', text: 'プロフィール')
       expect(page).to have_css('.user-name', text: 'test user')
@@ -27,7 +27,7 @@ feature 'ユーザー作成、ログイン、ログアウト' do
 
     scenario '正しい情報を入れるとログインできる' do
       fill_in 'user[email]', with: 'user1@example.com'
-      fill_in 'user[password_digest]', with: 'user_password'
+      fill_in 'user[password]', with: 'user_password'
       click_on 'ログインする'
 
       expect(page).to have_css('.user-name', text: 'user_name1')
@@ -35,7 +35,7 @@ feature 'ユーザー作成、ログイン、ログアウト' do
 
     scenario '間違ったemailを入れるとログインできない' do
       fill_in 'user[email]', with: 'other@example.com'
-      fill_in 'user[password_digest]', with: 'user_password'
+      fill_in 'user[password]', with: 'user_password'
 
       click_on 'ログインする'
 
@@ -44,7 +44,7 @@ feature 'ユーザー作成、ログイン、ログアウト' do
 
     scenario '間違ったpasswordを入れるとログインできない' do
       fill_in 'user[email]', with: 'user1@example.com'
-      fill_in 'user[password_digest]', with: 'other_password'
+      fill_in 'user[password]', with: 'other_password'
 
       click_on 'ログインする'
 

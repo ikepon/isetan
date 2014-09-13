@@ -11,8 +11,11 @@
     = f.label :email
     = f.text_field :email, class: 'form-control', required: true, placeholder: 'user@example.com'
   .form-group
-    = f.label :password_digest
-    = f.password_field :password_digest, class: 'form-control', required: true
+    = f.label :password
+    = f.password_field :password, class: 'form-control', required: true
+  .form-group
+    = f.label :password_confirmation, "Confirmation"
+    = f.password_field :password_confirmation, class: 'form-control', required: true
   .form-group
     = f.label :image
     = image_tag @user.image.thumb.url if @user.image?
@@ -22,4 +25,4 @@
   .form-group
     = f.label :profile
     = f.text_area :profile, class: 'form-control', placeholder: '普段は技術書を読んでいますが、ビジネス系の本も興味があります。'
-  = f.submit '保存する', class: 'btn btn-default'
+  = f.submit '登録する', class: 'btn btn-default'
