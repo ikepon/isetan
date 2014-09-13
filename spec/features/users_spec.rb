@@ -75,8 +75,9 @@ feature "User ページ" do
       scenario "ユーザ名が51文字以上の場合、画面が遷移せず、エラーメッセージが表示される" do
         fill_in 'user[name]', with: "a" * 51
         fill_in 'user[email]', with: "user@example.com"
-        fill_in 'user[password_digest]', with: "a" * 10
-        click_on '保存する'
+        fill_in 'user[password]', with: "a" * 10
+        fill_in 'user[password_confirmation]', with: "a" * 10
+        click_on '登録する'
 
         expect(page).to have_css('h2', text: "プロフィール編集")
         expect(page).to have_css('.alert', text: "Name is too long (maximum is 50 characters)")
