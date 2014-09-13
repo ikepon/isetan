@@ -3,5 +3,7 @@ Rails.application.routes.draw do
 
   get 'front_pages/index'
 
-  resources :users, only: %i(index show edit update)
+  resources :users, only: %i(index show new edit update)
+
+  match '/signup', to: 'users#new', via: 'get'
 end
