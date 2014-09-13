@@ -15,6 +15,7 @@ feature "User ページ" do
 
       expect(page).to have_css('h2', text: 'プロフィール')
       expect(page).to have_css('.user-name', text: 'test user')
+      expect(page).to have_css('.alert-success', text: 'isetanへようこそ！')
     end
   end
 
