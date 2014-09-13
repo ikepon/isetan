@@ -1,8 +1,4 @@
--if @user.errors.any?
-  .alert.alert-danger
-    %ul
-      - @user.errors.full_messages.each do |msg|
-        %lu= msg
+= render 'shared/error_messages'
 = form_for @user do |f|
   .form-group
     = f.label :name
