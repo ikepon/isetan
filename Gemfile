@@ -20,6 +20,7 @@ gem 'rmagick'
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'thin', require: false
 end
 
 group :test do
@@ -40,6 +41,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry', group: :test
+  gem 'pry-rails'
 end
 
 # Use ActiveModel has_secure_password
