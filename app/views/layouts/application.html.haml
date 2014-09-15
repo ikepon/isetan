@@ -1,0 +1,61 @@
+!!!
+%html
+  %head
+    %title Isetan
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %meta{charset: "utf-8"}
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+  %body
+    .navbar.navbar-fixed-top{role: "navigation"}
+      .container
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          =link_to 'Isetan', root_path, class: 'navbar-brand'
+        .collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li.active
+              %a{href: "#"} Hot
+            %li
+              %a{href: "#"} New
+            %li
+              %a{href: "#"} 予約
+            %li
+              %a{href: "#contact"} お問合せ
+          %ul.nav.navbar-nav.navbar-right
+            - if signed_in?
+              %li=link_to 'Users', users_path
+              %li.dropdown
+                =link_to '#', class: 'dropdown-toggle', 'data-toggle' => 'dropdown' do
+                  Account
+                  %b.caret
+                %ul.dropdown-menu
+                  %li=link_to 'Profile', current_user
+                  %li=link_to 'Settings', '#'
+                  %li.divider
+                  %li=link_to 'Logout', logout_path, method: 'delete'
+            - else
+              %li=link_to 'Login', login_path
+        / /.nav-collapse
+    .container.contents-area
+      - flash.each do |key, value|
+        %div(class='alert alert-#{key}')
+          = "#{value}"
+      = yield
+    / /.container
+    %footer
+      %p.text-center
+        &copy; isetan 2014　|　
+        =link_to 'サイトについて', '/'
+        　|　
+        =link_to 'お問合せ', '/'
+        　|　
+        =link_to '運営者', '/'
+    <!-- Bootstrap core JavaScript -->
+    %script{src: "https://code.jquery.com/jquery.js"}
+    = javascript_include_tag "bootstrap.min"

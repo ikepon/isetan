@@ -1,0 +1,31 @@
+.container
+  .row
+    #contents
+      .col-md-8
+        .row
+          %h2 ユーザ一覧
+          %table.table.table-hover
+            %thead
+              %tr
+                %th #
+                %th ユーザ名
+                %th 詳細へ
+            %tbody
+              - if @users
+                - @users.each do |user|
+                  %tr
+                    %td.user-id
+                      = user.id
+                      - if user.image?
+                        = image_tag user.image.thumb.url
+                      - else
+                        = image_tag 'noimage.jpg', size: '50x50'
+                    %td.user-name= user.name
+                    %td.user-profile= link_to 'プロフィールへ', user_path(user)
+              - else
+                %tr
+                  %td 登録しているユーザーはいません。
+    #sidebar
+      .col-md-4
+        %h3.content-title News
+        %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
