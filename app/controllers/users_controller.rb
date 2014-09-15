@@ -23,11 +23,15 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def update
-    if @user.update(user_params)
-      redirect_to user_url(@user)
+    # TODO パスワード入力なしでも更新できるように
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile updated"
+      redirect_to @user
     else
       render 'edit'
     end
