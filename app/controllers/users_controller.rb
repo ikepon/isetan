@@ -51,7 +51,10 @@ class UsersController < ApplicationController
   end
 
   def signed_in_user
-    redirect_to login_url, notice: "ログインしてください" unless signed_in?
+    unless signed_in?
+      store_location
+      redirect_to login_url, notice: "ログインしてください"
+    end
   end
 
   def correct_user
