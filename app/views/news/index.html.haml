@@ -10,8 +10,7 @@
                 %tr
                   %td.news-date
                     = news.created_at.to_formatted_s(:date)
-                  %td.news-title= news.title
-                  %td.news-content= link_to '詳細へ', news_path(news)
+                  %td.news-title= link_to news.title, news_path(news)
             - else
               %tr
                 %td ニュースはありません。
