@@ -9,7 +9,7 @@
               - @news.each do |news|
                 %tr
                   %td.news-date
-                    = news.created_at
+                    = news.created_at.to_formatted_s(:date)
                   %td.news-title= news.title
                   %td.news-content= link_to '詳細へ', news_path(news)
             - else

@@ -11,7 +11,7 @@
                 %th タイトル
                 %td.news-title
                   = @news.title
-                  %span.news-date= "(#{@news.created_at})"
+                  %span.news-date= "(#{@news.created_at.to_formatted_s(:date)})"
               %tr
                 %th 詳細
                 %td.news-profile= @news.content
