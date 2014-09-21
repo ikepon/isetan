@@ -1,0 +1,23 @@
+.container
+  .row
+    #contents
+      .col-md-8
+        .row
+          %h2 News
+          %table.table
+            %tbody
+              %tr
+              %tr
+                %th タイトル
+                %td.news-title
+                  = @news.title
+                  %span.news-date= "(#{@news.created_at})"
+              %tr
+                %th 詳細
+                %td.news-profile= @news.content
+          = link_to 'ニュース一覧に戻る', news_index_path, class: "btn btn-default"
+
+    #sidebar
+      .col-md-4
+        %h3.content-title News
+        %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
