@@ -12,22 +12,22 @@ feature 'Newsページ' do
     end
 
     scenario 'タイトル、日付一覧が表示されている' do
-      expect(page).to have_css('.date', text: '50.11.02')
-      expect(page).to have_css('.title', text: 'Title1')
-      expect(page).to have_css('.date', text: '50.11.22')
-      expect(page).to have_css('.title', text: 'Title2')
-      expect(page).to have_css('.date', text: '50.11.25')
-      expect(page).to have_css('.title', text: 'Title3')
-      expect(page).to have_css('.date', text: '50.11.27')
-      expect(page).to have_css('.title', text: 'Title4')
+      expect(page).to have_css('.news-date', text: news1.created_at.to_formatted_s(:date))
+      expect(page).to have_css('.news-title', text: news1.title)
+      expect(page).to have_css('.news-date', text: news2.created_at.to_formatted_s(:date))
+      expect(page).to have_css('.news-title', text: news2.title)
+      expect(page).to have_css('.news-date', text: news3.created_at.to_formatted_s(:date))
+      expect(page).to have_css('.news-title', text: news3.title)
+      expect(page).to have_css('.news-date', text: news4.created_at.to_formatted_s(:date))
+      expect(page).to have_css('.news-title', text: news4.title)
     end
 
     scenario 'タイトルをクリックすると詳細ページに遷移する' do
-      click_link 'Title1'
+      click_link news1.title
 
-      expect(page).to have_css('.title', text: 'Title1')
-      expect(page).to have_css('.date', text: '50.11.02')
-      expect(page).to have_css('.content', text: 'Content1content1content1content1content1content1content1content1content1content1content1content1content1')
+      expect(page).to have_css('.news-title', text: news1.title)
+      expect(page).to have_css('.news-date', text: news1.created_at.to_formatted_s(:date))
+      expect(page).to have_css('.news-content', text: news1.content)
     end
   end
 end
