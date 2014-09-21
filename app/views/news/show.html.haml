@@ -14,7 +14,7 @@
                   %span.news-date= "(#{@news.created_at.to_formatted_s(:date)})"
               %tr
                 %th 詳細
-                %td.news-profile= @news.content
+                %td.news-content= @news.content
           = link_to 'ニュース一覧に戻る', news_index_path, class: "btn btn-default"
 
     #sidebar
