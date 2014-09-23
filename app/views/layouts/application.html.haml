@@ -24,14 +24,7 @@
             .col-md-4
               = render 'layouts/sidebar'
     / /.container
-    %footer
-      %p.text-center
-        &copy; isetan 2014　|　
-        =link_to 'サイトについて', '/'
-        　|　
-        =link_to 'お問合せ', '/'
-        　|　
-        =link_to '運営者', '/'
+    = render 'layouts/footer'
     <!-- Bootstrap core JavaScript -->
     %script{src: "https://code.jquery.com/jquery.js"}
     = javascript_include_tag "bootstrap.min"
