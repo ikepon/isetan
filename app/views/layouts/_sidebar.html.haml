@@ -1,4 +1,4 @@
-- if @news.exists? && params[:controller] != 'news'
+- if @news && params[:controller] != 'news'
   .news
     %h3.content-title News
     - @news.each do |news|
