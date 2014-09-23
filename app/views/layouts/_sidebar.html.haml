@@ -1,0 +1,10 @@
+- if @news && params[:controller] != 'news'
+  .news
+    %h3.content-title News
+
+    - @news.each do |news|
+      %p
+        %span.news-date= news.created_at.to_formatted_s(:date)
+        %span.news-title= link_to news.title, news_path(news)
+    %p.text-right
+      = link_to 'News一覧へ', news_index_path

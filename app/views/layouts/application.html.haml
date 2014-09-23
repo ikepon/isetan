@@ -46,7 +46,23 @@
       - flash.each do |key, value|
         %div(class='alert alert-#{key}')
           = "#{value}"
-      = yield
+      -if params[:controller] == 'front_pages'
+        .jumbotron
+          .container
+            %h2.view-title 蔵書管理 isetan
+            %p This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.
+            %p
+
+              %a{class: "btn btn-primary btn-lg", role: "button"}
+                Learn more &raquo;
+      .container
+        .row
+          #contents
+            .col-md-8
+              = yield
+          #sidebar
+            .col-md-4
+              = render 'layouts/sidebar'
     / /.container
     %footer
       %p.text-center
