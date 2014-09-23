@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    @news = News.order('created_at DESC').limit(3)
   end
 
   def create
