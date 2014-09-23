@@ -1,7 +1,6 @@
 - if @news && params[:controller] != 'news'
   .news
     %h3.content-title News
-
     - @news.each do |news|
       %p
         %span.news-date= news.created_at.to_formatted_s(:date)
