@@ -1,7 +1,7 @@
-- if @news && params[:controller] != 'news'
+- if @sidebar_news && params[:controller] != 'news'
   .news
     %h3.content-title News
-    - @news.each do |news|
+    - @sidebar_news.each do |news|
       %p
         %span.news-date= news.created_at.to_formatted_s(:date)
         %span.news-title= link_to news.title, news_path(news)

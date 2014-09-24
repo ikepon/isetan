@@ -5,16 +5,13 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    @news = News.order('created_at DESC').limit(3)
   end
 
   def show
-    @news = News.order('created_at DESC').limit(3)
   end
 
   def new
     @user = User.new
-    @news = News.order('created_at DESC').limit(3)
   end
 
   def create
@@ -29,7 +26,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @news = News.order('created_at DESC').limit(3)
   end
 
   def update
