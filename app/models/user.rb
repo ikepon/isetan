@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   before_create :create_remember_token
 
+  has_many :collections
+
   with_options presence: true do |required|
     required.validates :name, length: { maximum: 50 }
     required.validates :email, uniqueness: { case_sensitive: false }
