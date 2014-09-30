@@ -11,8 +11,7 @@ feature "トップページ" do
     end
 
     scenario "navbarのメニューが表示されている" do
-      expect(page).to have_css('ul.nav.navbar-nav li', text: 'Hot')
-      expect(page).to have_css('ul.nav.navbar-nav li', text: 'New')
+      expect(page).to have_css('ul.nav.navbar-nav li', text: '蔵書')
       expect(page).to have_css('ul.nav.navbar-nav li', text: '予約')
       expect(page).to have_css('ul.nav.navbar-nav li', text: 'お問合せ')
       expect(page).to have_css('ul.nav.navbar-nav li', text: 'Login')
