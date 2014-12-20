@@ -12,6 +12,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'bcrypt-ruby', require: 'bcrypt'
 
+gem 'cancancan'
+gem 'activeadmin', github: 'activeadmin'
+
 # image
 gem 'carrierwave'
 gem 'rmagick'
