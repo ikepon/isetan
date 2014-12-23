@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :book do
-    sequence(:title) {|n| "BookTitle#{n}"}
-    sequence(:isbn) {|n| "123456789#{n}"}
-    sequence(:wanted) {|n| "1#{n}"}
-    sequence(:read) {|n| "3#{n}"}
-    sequence(:rental) {|n| "5#{n}"}
+    title 'ステキな本'
+    isbn '123-1234567890'
+    wanted 1
+    read 3
+    rental 5
   end
 end

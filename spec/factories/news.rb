@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :news do
-    sequence(:title) {|n| "Title#{n}"}
-    sequence(:content) {|n| "Content#{n}content#{n}content#{n}content#{n}content#{n}content#{n}content#{n}content#{n}content#{n}content#{n}content#{n}content#{n}content#{n}"}
+    title '機能実装したったぜ！'
+    content '蔵書、読書に関するあんなことや、こんなことか、こんなに簡単にできちゃうなんて素晴らしい！'
   end
 end
