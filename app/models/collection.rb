@@ -1,4 +1,4 @@
 class Collection < ActiveRecord::Base
   belongs_to :book
-  belongs_to :users
+  belongs_to :user
 end
