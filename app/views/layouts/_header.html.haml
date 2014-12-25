@@ -9,6 +9,8 @@
       =link_to 'Isetan', root_path, class: 'navbar-brand'
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
+        %li
+          = link_to '読書感想', reviews_path
         %li.active
           = link_to '蔵書', collections_path
         %li
