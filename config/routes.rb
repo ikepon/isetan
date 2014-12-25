@@ -6,8 +6,8 @@ Rails.application.routes.draw do
 
   resources :users, only: %i(index show new create edit update)
   resources :news, only: %i(index show new create)
-
   resources :collections
+  resources :reviews
 
   resources :sessions, only: %i(new create destroy)
   match '/signup', to: 'users#new',        via: 'get'
