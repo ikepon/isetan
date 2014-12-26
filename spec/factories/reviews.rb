@@ -1,11 +1,9 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :review do
     user_id 1
     book_id 1
-    title "MyString"
-    review "MyText"
-    evaluation 1
+    title "この本は名著ですね！"
+    review "いや〜、すばらしい！すばらしすぎて言葉がでない。"
+    evaluation 5
   end
 end
