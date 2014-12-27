@@ -15,6 +15,8 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'cancancan'
 gem 'activeadmin', github: 'activeadmin'
 
+gem 'kaminari'
+
 # image
 gem 'carrierwave'
 gem 'rmagick'

@@ -1,2 +1,26 @@
-%h1 Reports#index
-%p Find me in app/views/reports/index.html.haml
+.container
+  .row
+    #contents
+      .col-md-8
+        .row
+          %h2 読書感想一覧
+          - @reviews.each do |review|
+            .col-sm-12.book-box
+              .row
+                - if review.created_at >= 3.days.ago.beginning_of_day
+                  %span.label.label-danger.tagclip New
+                .col-xs-3
+                  = image_tag "agile_rails.jpeg", width: "150px"
+                .col-xs-9
+                  %h3.content-title= link_to review.title, review_path(review)
+                  %p
+                    %span.glyphicon.glyphicon-user
+                    = current_user.name
+                    = "評価：#{review.evaluation}"
+                  %p= review.review
+                  -# TODO いいね！、読んだことある！はあとで実装
+                    %span.glyphicon.glyphicon-heart-empty
+                    3                  　
+                    %span.glyphicon.glyphicon-pencil
+                    5
+          = paginate @reviews
