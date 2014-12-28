@@ -1,0 +1,16 @@
+.container
+  .row
+    #contents
+      .col-md-8
+        .row
+          %h2 News 一覧
+          %table.table.table-hover
+            - if @news
+              - @news.each do |news|
+                %tr
+                  %td.news-date
+                    = news.created_at.to_formatted_s(:date)
+                  %td.news-title= link_to news.title, news_path(news)
+            - else
+              %tr
+                %td ニュースはありません。

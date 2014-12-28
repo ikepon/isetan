@@ -12,6 +12,11 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'bcrypt-ruby', require: 'bcrypt'
 
+gem 'cancancan'
+gem 'activeadmin', github: 'activeadmin'
+
+gem 'kaminari'
+
 # image
 gem 'carrierwave'
 gem 'rmagick'
@@ -45,8 +50,8 @@ group :development do
 end
 
 group :production do
-  gem 'pg', '0.15.1'
-  gem 'rails_12factor', '0.0.2'
+  gem 'pg'
+  gem 'rails_12factor'
 end
 
 # Use ActiveModel has_secure_password

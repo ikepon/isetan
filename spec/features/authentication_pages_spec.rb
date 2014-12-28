@@ -9,14 +9,14 @@ feature 'ログイン、ログアウト' do
     end
 
     scenario '正しい情報を入れるとログインできる' do
-      fill_in 'session[email]', with: 'user1@example.com'
-      fill_in 'session[password]', with: 'user_password'
+      fill_in 'session[email]', with: user.email
+      fill_in 'session[password]', with: user.password
 
       within '.login' do
         click_on 'Login'
       end
 
-      expect(page).to have_css('.user-name', text: 'user_name1')
+      expect(page).to have_css('.user-name', text: user.name)
       expect(page).to have_link('Profile', href: user_path(user))
       expect(page).to have_link('Logout', href: logout_path)
       expect(page).not_to have_link('Login', href: login_path)
@@ -25,7 +25,7 @@ feature 'ログイン、ログアウト' do
 
     scenario '間違ったemailを入れるとログインできない' do
       fill_in 'session[email]', with: 'other@example.com'
-      fill_in 'session[password]', with: 'user_password'
+      fill_in 'session[password]', with: user.password
 
       within '.login' do
         click_on 'Login'
@@ -35,7 +35,7 @@ feature 'ログイン、ログアウト' do
     end
 
     scenario '間違ったpasswordを入れるとログインできない' do
-      fill_in 'session[email]', with: 'user1@example.com'
+      fill_in 'session[email]', with: user.email
       fill_in 'session[password]', with: 'other_password'
 
       within '.login' do

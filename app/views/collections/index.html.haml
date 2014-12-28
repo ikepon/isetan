@@ -1,0 +1,23 @@
+.container
+  .row
+    #contents
+      .col-md-8
+        .row
+          %h2 蔵書一覧
+          %table.table.table-hover
+            - if @collections.exists?
+              - @collections.each do |collection|
+                %tr
+                  %th タイトル
+                  %th 欲しい！
+                  %th 読まれた回数
+                  %th レンタル回数
+                %tr
+                  %td.title
+                    = link_to collection.book.title, collection_path(collection)
+                  %td.wanted= collection.book.wanted
+                  %td.read= collection.book.read
+                  %td.rental= collection.book.rental
+            - else
+              %tr
+                %td 蔵書はありません

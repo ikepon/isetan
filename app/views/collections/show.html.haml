@@ -1,0 +1,15 @@
+.container
+  .row
+    #contents
+      .col-md-8
+        .row
+          %h2= @collection.book.title
+          %table.table.table-hover
+            %tr
+              %th 欲しい！
+              %th 読まれた回数
+              %th レンタル回数
+            %tr
+              %td.wanted= @collection.book.wanted
+              %td.read= @collection.book.read
+              %td.rental= @collection.book.rental
