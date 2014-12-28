@@ -20,3 +20,5 @@
                   %span.glyphicon.glyphicon-pencil
                   5
                 %p= @review.review
+                - if current_user?(@review.user)
+                  = link_to '編集', edit_review_path(@review), class: 'btn btn-default'
