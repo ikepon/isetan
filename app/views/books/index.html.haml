@@ -3,7 +3,10 @@
     #contents
       .col-md-8
         .row
-          %h2 蔵書一覧
+          .col-sm-8
+            %h2 蔵書一覧
+          .col-sm-4
+            = link_to '蔵書登録', new_book_path, class: 'btn btn-default'
           %table.table.table-hover
             - if @books.exists?
               %tr
