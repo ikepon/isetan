@@ -3,15 +3,4 @@
     #contents
       .col-md-8
         .row
-          = form_for(@review) do |f|
-            .form-group
-              = f.label :title
-              = f.text_field :title, class: 'form-control'
-            .form-group
-              = f.label :review
-              = f.text_area :review, class: 'form-control'
-            .form-group
-              = f.label :evaluation
-              = f.text_field :evaluation, class: 'form-control'
-
-            = f.submit '編集する', class: 'btn btn-primary'
+          = render 'form'

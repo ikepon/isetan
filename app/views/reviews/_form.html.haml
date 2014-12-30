@@ -1,0 +1,19 @@
+= form_for(@review) do |f|
+  .form-group
+    - if params[:action] == 'edit'
+      %p 本のタイトル
+      %p.form-control-static= @review.book.title
+    - else
+      = f.label :book_id
+      = f.select :book_id, options_from_collection_for_select(@books, 'id', 'title'), {}, class: 'form-control'
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+  .form-group
+    = f.label :review
+    = f.text_area :review, class: 'form-control'
+  .form-group
+    = f.label :evaluation
+    = f.text_field :evaluation, class: 'form-control'
+  = f.hidden_field :user_id
+  = f.submit '投稿する', class: 'btn btn-primary'
