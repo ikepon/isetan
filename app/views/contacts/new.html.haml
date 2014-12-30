@@ -4,6 +4,10 @@
       .col-md-8
         .row
           %h2 お問合せ
+          - if @contact.errors.any?
+            %ul.alert.alert-danger.list-unstyled
+              - @contact.errors.full_messages.each do |msg|
+                %li= msg
           = form_for @contact, method: :post, url: confirm_contacts_path do |f|
             .form-group
               = f.label :category
