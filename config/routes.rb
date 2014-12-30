@@ -6,8 +6,15 @@ Rails.application.routes.draw do
 
   resources :users, only: %i(index show new create edit update)
   resources :news, only: %i(index show new create)
+  resources :books
   resources :collections
   resources :reviews
+  resources :contacts, only: %i(new create) do
+    collection do
+      post :confirm
+      get :complete
+    end
+  end
 
   resources :sessions, only: %i(new create destroy)
   match '/signup', to: 'users#new',        via: 'get'

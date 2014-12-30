@@ -17,4 +17,5 @@
                 %th 自己紹介
                 %td.user-profile= @user.profile
           = link_to 'ユーザ一覧に戻る', users_path, class: "btn btn-default"
-          = link_to 'プロフィールを編集する', edit_user_path(@user), class: "btn btn-default"
+          - if current_user?(@user)
+            = link_to 'プロフィールを編集する', edit_user_path(@user), class: "btn btn-default"

@@ -1,0 +1,26 @@
+.container
+  .row
+    #contents
+      .col-md-8
+        .row
+          .col-sm-8
+            %h2 蔵書一覧
+          .col-sm-4
+            = link_to '蔵書登録', new_book_path, class: 'btn btn-default'
+          %table.table.table-hover
+            - if @books.exists?
+              %tr
+                %th タイトル
+                %th 欲しい！
+                %th 読まれた回数
+                %th レンタル回数
+              - @books.each do |book|
+                %tr
+                  %td.title
+                    = link_to book.title, book_path(book)
+                  %td.wanted= book.wanted
+                  %td.read= book.read
+                  %td.rental= book.rental
+            - else
+              %tr
+                %td 蔵書はありません

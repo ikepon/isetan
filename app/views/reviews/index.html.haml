@@ -3,9 +3,12 @@
     #contents
       .col-md-8
         .row
-          %h2 読書感想一覧
+          .col-xs-9
+            %h2 読書感想一覧
+          .col-xs-3
+            = link_to '感想を投稿する', new_review_path, class: 'btn btn-default'
           - @reviews.each do |review|
-            .col-sm-12.book-box
+            .col-xs-12.book-box
               .row
                 - if review.created_at >= 3.days.ago.beginning_of_day
                   %span.label.label-danger.tagclip New

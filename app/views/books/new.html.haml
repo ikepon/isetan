@@ -1,0 +1,25 @@
+.container
+  .row
+    #contents
+      .col-md-8
+        .row
+          %h2 蔵書登録
+          -if @book.errors.any?
+            .alert.alert-danger
+              %ul
+                - @book.errors.full_messages.each do |msg|
+                  %lu= msg
+          .text-right.help-block
+            %span.required> ＊
+            は必須です
+          = form_for @book do |f|
+            .form-group
+              = f.label :title
+              %span.required ＊
+              = f.text_field :title, class: 'form-control', required: true, placeholder: 'おもしろい本 1982'
+            .form-group
+              = f.label :isbn
+              %span.required ＊
+              = f.text_field :isbn, class: 'form-control', required: true, placeholder: '1234567890123'
+              %span ※13桁、ハイフンなしで入力してください
+            = f.submit '登録する', class: 'btn btn-default'

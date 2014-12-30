@@ -1,0 +1,28 @@
+.container
+  .row
+    #contents
+      .col-md-8
+        .row
+          %h2 お問合せ
+          - if @contact.errors.any?
+            %ul.alert.alert-danger.list-unstyled
+              - @contact.errors.full_messages.each do |msg|
+                %li= msg
+          = form_for @contact, method: :post, url: confirm_contacts_path do |f|
+            .form-group
+              = f.label :category
+              = f.collection_radio_buttons :category, %w(ユーザ登録について 機能について その他), :to_s, :to_s do |b|
+                %p
+                  = b.radio_button
+                  = b.text
+            .form-group
+              = f.label :name
+              = f.text_field :name, class: 'form-control'
+            .form-group
+              = f.label :email
+              = f.text_field :email, class: 'form-control'
+            .form-group
+              = f.label :content
+              = f.text_area :content, class: 'form-control'
+            = f.hidden_field :user_name
+            = f.submit '確認する', class: 'btn btn-primary'
