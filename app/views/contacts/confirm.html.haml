@@ -1,0 +1,26 @@
+.container
+  .row
+    #contents
+      .col-md-8
+        .row
+          %h2 お問合せ内容の確認
+          = form_for @contact do |f|
+            .form-group
+              = f.label :category
+              %p= @contact.category
+              = f.hidden_field :category
+            .form-group
+              = f.label :name
+              %p= @contact.name
+              = f.hidden_field :name
+            .form-group
+              = f.label :email
+              %p= @contact.email
+              = f.hidden_field :email
+            .form-group
+              = f.label :content
+              %p= @contact.content
+              = f.hidden_field :content
+            = f.hidden_field :user_name
+            = link_to '戻る', 'javascript: history.back()', class: 'btn btn-default'
+            = f.submit '送信する', class: 'btn btn-primary'
