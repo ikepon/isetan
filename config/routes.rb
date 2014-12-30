@@ -9,6 +9,12 @@ Rails.application.routes.draw do
   resources :books
   resources :collections
   resources :reviews
+  resources :contacts, only: %i(new create) do
+    collection do
+      post :confirm
+      get :complete
+    end
+  end
 
   resources :sessions, only: %i(new create destroy)
   match '/signup', to: 'users#new',        via: 'get'
