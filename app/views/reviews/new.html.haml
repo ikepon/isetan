@@ -1,2 +1,20 @@
-%h1 Reports#new
-%p Find me in app/views/reports/new.html.haml
+.container
+  .row
+    #contents
+      .col-md-8
+        .row
+          = form_for(@review) do |f|
+            .form-group
+              = f.label :book_id
+              = f.select :book_id, options_from_collection_for_select(@books, 'id', 'title'), {}, class: 'form-control'
+            .form-group
+              = f.label :title
+              = f.text_field :title, class: 'form-control'
+            .form-group
+              = f.label :review
+              = f.text_area :review, class: 'form-control'
+            .form-group
+              = f.label :evaluation
+              = f.text_field :evaluation, class: 'form-control'
+            = f.hidden_field :user_id
+            = f.submit '投稿する', class: 'btn btn-primary'

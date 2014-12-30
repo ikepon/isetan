@@ -10,6 +10,19 @@ class ReviewsController < ApplicationController
   end
 
   def new
+    @books = Book.order('title')
+    @review = Review.new(user_id: current_user.id)
+  end
+
+  def create
+    @review = Review.new(review_params)
+
+    if @review.save
+      flash[:success] = '感想を投稿しました'
+      redirect_to reviews_path
+    else
+      render :new
+    end
   end
 
   def edit
@@ -29,7 +42,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:title, :review, :evaluation)
+    params.require(:review).permit(:user_id, :book_id, :title, :review, :evaluation)
   end
 
   def review_user
