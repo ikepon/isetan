@@ -10,7 +10,7 @@ class ContactsController < ApplicationController
   def confirm
     @contact = Contact.new(contact_params)
 
-    render action: 'show' unless @contact.valid?
+    render action: 'new' unless @contact.valid?
   end
 
   def create
