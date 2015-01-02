@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :users, only: %i(index show new create edit update)
   resources :news, only: %i(index show new create)
+  match 'books/new', via: 'post'
   resources :books
   resources :collections
   resources :reviews

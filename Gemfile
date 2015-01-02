@@ -17,6 +17,8 @@ gem 'activeadmin', github: 'activeadmin'
 
 gem 'kaminari'
 
+gem 'amazon-ecs'
+
 # image
 gem 'carrierwave'
 gem 'rmagick'
