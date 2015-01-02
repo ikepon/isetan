@@ -9,6 +9,19 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+
+    @keyword = params[:keyword]
+
+    if @keyword.present?
+      Amazon::Ecs.debug = true
+      @res = Amazon::Ecs.item_search(params[:keyword],
+          :search_index => 'Books',
+          :response_group => 'Medium',
+          :country        => 'jp'
+      )
+    else
+      return
+    end
   end
 
   def create
