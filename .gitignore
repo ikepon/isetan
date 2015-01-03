@@ -6,5 +6,6 @@
 /tmp
 /public/uploads
 /config/secrets.yml
+.env
 isetan.sublime-project
 isetan.sublime-workspace
