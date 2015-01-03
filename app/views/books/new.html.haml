@@ -24,17 +24,28 @@
               %span ※13桁、ハイフンなしで入力してください
             = f.submit '登録する', class: 'btn btn-default'
 
-%div
-  = form_tag new_book_path do
-    = text_field_tag 'keyword', @keyword
-    = submit_tag '検索'
-%div
-  - if @res.present?
-    %ul{style: "list-style: none;"}
-      - @res.items.each do |i|
-        %li{style: "clear: both;"}
-          %div{style: "width: 150px;float: left;text-align:center;"}
-            = link_to i.get('DetailPageURL') do
-              = image_tag i.get('MediumImage/URL')
-          %div{style: "width: 150px; float: left;"}= i.get('ASIN')
-          %div{style: "width: 150px; float: left;"}= i.get('ItemAttributes/Title')
+        .search-area
+          = form_tag new_book_path do
+            .input-group
+              = text_field_tag 'keyword', @keyword, class: 'form-control'
+              %span.input-group-btn
+                = submit_tag '検索', class: 'btn btn-default'
+          - if @res.present? && @res.items.present?
+            .search-results
+              %table.table
+                %thead
+                  %tr
+                    %th 本
+                    %th ISBN
+                    %th タイトル
+                %tbody
+                  - @res.items.each do |i|
+                    %tr
+                      %td
+                        = link_to i.get('DetailPageURL') do
+                          = image_tag i.get('MediumImage/URL')
+                      %td= i.get('ASIN')
+                      %td= i.get('ItemAttributes/Title')
+          - else
+            - if @keyword.present?
+              = "キーワード：#{@keyword} に一致するものはありませんでした。"

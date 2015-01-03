@@ -38,6 +38,15 @@
   color: red;
 }
 
+.search-area {
+  margin: 10px;
+  padding: 10px;
+  background-color: #FFFFCC;
+  .search-results {
+    padding-top: 20px;
+  }
+}
+
 // footer
 footer {
   background-color: white;
