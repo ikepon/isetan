@@ -23,3 +23,29 @@
               = f.text_field :isbn, class: 'form-control', required: true, placeholder: '1234567890123'
               %span ※13桁、ハイフンなしで入力してください
             = f.submit '登録する', class: 'btn btn-default'
+
+        .search-area
+          = form_tag new_book_path do
+            .input-group
+              = text_field_tag 'keyword', @keyword, class: 'form-control'
+              %span.input-group-btn
+                = submit_tag '検索', class: 'btn btn-default'
+          - if @res.present? && @res.items.present?
+            .search-results
+              %table.table
+                %thead
+                  %tr
+                    %th 本
+                    %th ISBN
+                    %th タイトル
+                %tbody
+                  - @res.items.each do |i|
+                    %tr
+                      %td
+                        = link_to i.get('DetailPageURL') do
+                          = image_tag i.get('MediumImage/URL')
+                      %td= i.get('ASIN')
+                      %td= i.get('ItemAttributes/Title')
+          - else
+            - if @keyword.present?
+              = "キーワード：#{@keyword} に一致するものはありませんでした。"

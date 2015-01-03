@@ -1,8 +1,16 @@
-.jumbotron
-  .container
-    %h2.view-title 蔵書管理 isetan
-    %p This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.
-    %p
-
-      %a{class: "btn btn-primary btn-lg", role: "button"}
-        Learn more &raquo;
+.key-visual
+  .bg-filter
+    .row
+      .col-sm-4.col-sm-offset-8
+        .main-view-area
+          %h2.view-title 蔵書管理 isetan
+          %p
+            あなたの本をみんなで共有しましょう！
+            %br
+            読んだ本の記録もできます！
+          - if signed_in?
+            = link_to '感想を見る', reviews_path, class: 'btn btn-default signup-btn'
+            = link_to '感想を書く', new_review_path, class: 'btn btn-default signin-btn'
+          - else
+            = link_to 'ユーザー登録', new_user_path, class: 'btn btn-default signup-btn'
+            = link_to 'ログイン', login_path, class: 'btn btn-default signin-btn'

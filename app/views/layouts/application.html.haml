@@ -9,12 +9,12 @@
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
   %body
     = render 'layouts/header'
+    -if params[:controller] == 'front_pages'
+      = render 'layouts/main_view'
     .container.contents-area
       - flash.each do |key, value|
         %div(class='alert alert-#{key}')
           = "#{value}"
-      -if params[:controller] == 'front_pages'
-        = render 'layouts/main_view'
       .container
         .row
           #contents
@@ -27,4 +27,3 @@
     = render 'layouts/footer'
     <!-- Bootstrap core JavaScript -->
     %script{src: "https://code.jquery.com/jquery.js"}
-    = javascript_include_tag "bootstrap.min"

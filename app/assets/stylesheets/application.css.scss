@@ -1,7 +1,8 @@
 /*
- *= require_tree .
- *= require_self
  *= require bootstrap
+ *= require custom
+ *= require front_pages
+ *= require_self
  */
 
 body {
@@ -10,3 +11,7 @@ body {
   color: darkslategray;
 }
 
+.contents-area{
+  margin-top: 25px;
+  padding-top: 25px;
+}

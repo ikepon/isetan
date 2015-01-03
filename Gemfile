@@ -14,8 +14,11 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 
 gem 'cancancan'
 gem 'activeadmin', github: 'activeadmin'
+gem 'dotenv-rails'
 
 gem 'kaminari'
+
+gem 'amazon-ecs'
 
 # image
 gem 'carrierwave'
