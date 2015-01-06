@@ -6,7 +6,10 @@
           .col-xs-9
             %h2 読書感想一覧
           .col-xs-3
-            = link_to '感想を投稿する', new_review_path, class: 'btn btn-default'
+            - if signed_in?
+              = link_to '感想を投稿する', new_review_path, class: 'btn btn-default'
+            - else
+              = link_to '感想を投稿する', login_path, class: 'btn btn-default'
           - @reviews.each do |review|
             .col-xs-12.book-box
               .row
