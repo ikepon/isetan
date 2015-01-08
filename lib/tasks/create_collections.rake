@@ -1,7 +1,7 @@
 namespace :db do
   namespace :seed do
     task 'create_collections' => :environment do
-      book_stat = ["reservable", "reservable", "rented", "expired"]
+      book_stat = [1, 1, 2, 3]
 
       40.times do |i|
         rented_at = DateTime.new(2014, 10, 1) + i

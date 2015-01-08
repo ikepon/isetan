@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20141230022423) do
   add_index "books", ["title"], name: "index_books_on_title"
 
   create_table "collections", force: true do |t|
-    t.string   "status"
+    t.integer  "status"
     t.date     "rented_at"
     t.date     "returned_at"
     t.integer  "user_id"
