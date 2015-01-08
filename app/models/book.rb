@@ -4,7 +4,6 @@ class Book < ActiveRecord::Base
 
   accepts_nested_attributes_for :collections
 
-  validates :isbn, uniqueness: true
-  validates :isbn, numericality: { only_integer: true }
-  validates :isbn, length: { in: 10..13 }
+  validates :title, presence: true
+  validates :isbn,  presence: true, uniqueness: true, length: { in: 10..13 }
 end
