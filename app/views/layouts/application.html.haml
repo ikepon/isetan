@@ -15,14 +15,11 @@
       - flash.each do |key, value|
         %div(class='alert alert-#{key}')
           = "#{value}"
-      .container
-        .row
-          #contents
-            .col-md-8
-              = yield
-          #sidebar
-            .col-md-4
-              = render 'layouts/sidebar'
+      .row
+        .col-md-8#contents
+          = yield
+        .col-md-4#sidebar
+          = render 'layouts/sidebar'
     / /.container
     = render 'layouts/footer'
     <!-- Bootstrap core JavaScript -->
