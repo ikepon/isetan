@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20141230022423) do
     t.integer  "user_id"
     t.integer  "book_id"
     t.string   "title"
-    t.text     "review"
+    t.text     "content"
     t.integer  "evaluation"
     t.datetime "created_at"
     t.datetime "updated_at"

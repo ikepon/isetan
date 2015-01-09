@@ -21,7 +21,7 @@
                     %span.glyphicon.glyphicon-user
                     = review.user.name
                     = "評価：#{review.evaluation}"
-                  %p= review.review
+                  %p= review.content
                   - if current_user?(review.user)
                     = link_to '編集', edit_review_path(review), class: 'btn btn-default'
                   -# TODO いいね！、読んだことある！はあとで実装

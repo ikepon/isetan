@@ -3,5 +3,5 @@ class Review < ActiveRecord::Base
   belongs_to :book
 
   validates :title,  presence: true, length: { maximum: 50 }
-  validates :review, presence: true
+  validates :content, presence: true
 end
