@@ -1,67 +1,65 @@
-.row
-  -# TODO hot 機能実装
-    .col-sm-6.book-box
-      .row
-        %span.label.label-danger.tagclip Hot
-        .col-xs-6
-          = image_tag "agile_rails.jpeg", width: "150px"
-        .col-xs-6
-          %h3.content-title Hot No1
-          %p ★★★☆☆
-          %span.glyphicon.glyphicon-user
-          isetan man
-          %br
+-# TODO hot 機能実装
+  .col-sm-6.book-box
+    .row
+      %span.label.label-danger.tagclip Hot
+      .col-xs-6
+        = image_tag "agile_rails.jpeg", width: "150px"
+      .col-xs-6
+        %h3.content-title Hot No1
+        %p ★★★☆☆
+        %span.glyphicon.glyphicon-user
+        isetan man
+        %br
+        %span.glyphicon.glyphicon-heart-empty
+        3
+        　
+        %span.glyphicon.glyphicon-pencil
+        5
+    %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+    %p
+      %a{class: "btn btn-default", href: "#", role: "button"}
+        View details &raquo;
+  .col-sm-6.book-box
+    .row
+      %span.label.label-danger.tagclip Hot
+      .col-xs-6
+        = image_tag "agile_rails.jpeg", width: "150px"
+      .col-xs-6
+        %h3.content-title Hot No2
+        %p ★★★☆☆
+        %span.glyphicon.glyphicon-user
+        isetan man
+        %br
+        %span.glyphicon.glyphicon-heart-empty
+        3
+        　
+        %span.glyphicon.glyphicon-pencil
+        5
+    %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+    %p
+      %a{class: "btn btn-default", href: "#", role: "button"}
+        View details &raquo;
+- if @new_reviews.exists?
+  - @new_reviews.each do |review|
+    .row.book-box
+      - if review.created_at >= 3.days.ago.beginning_of_day
+        %span.label.label-warning.tagclip New
+      .col-xs-3
+        = image_tag "agile_rails.jpeg", class: 'img-responsive'
+      .col-xs-9.book-info
+        %h3.content-title= review.title
+        %p= review.book.title
+        %p= "評価：#{review.evaluation}"
+        %span.glyphicon.glyphicon-user
+        = review.user.name
+        %br
+        -# TODO いいね機能実装
           %span.glyphicon.glyphicon-heart-empty
-          3
-          　
+          3            　
           %span.glyphicon.glyphicon-pencil
           5
-      %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      %p
-        %a{class: "btn btn-default", href: "#", role: "button"}
-          View details &raquo;
-    .col-sm-6.book-box
-      .row
-        %span.label.label-danger.tagclip Hot
-        .col-xs-6
-          = image_tag "agile_rails.jpeg", width: "150px"
-        .col-xs-6
-          %h3.content-title Hot No2
-          %p ★★★☆☆
-          %span.glyphicon.glyphicon-user
-          isetan man
-          %br
-          %span.glyphicon.glyphicon-heart-empty
-          3
-          　
-          %span.glyphicon.glyphicon-pencil
-          5
-      %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      %p
-        %a{class: "btn btn-default", href: "#", role: "button"}
-          View details &raquo;
-  - if @new_reviews.exists?
-    - @new_reviews.each do |review|
-      .col-xs-12.book-box
-        .row
-          - if review.created_at >= 3.days.ago.beginning_of_day
-            %span.label.label-warning.tagclip New
-          .col-sm-4
-            = image_tag "agile_rails.jpeg", width: "150px"
-          .book-info
-            %h3.content-title= review.title
-            %p= review.book.title
-            %p= "評価：#{review.evaluation}"
-            %span.glyphicon.glyphicon-user
-            = review.user.name
-            %br
-            -# TODO いいね機能実装
-              %span.glyphicon.glyphicon-heart-empty
-              3            　
-              %span.glyphicon.glyphicon-pencil
-              5
-            %p= truncate review.content
-            %p= link_to '感想を見る', review_path(review), class: 'btn btn-default'
-  - else
-    .col-xs-12.book-box
-      あなたの感想投稿をお待ちしています！
+        %p= truncate review.content
+        %p= link_to '感想を見る', review_path(review), class: 'btn btn-default'
+- else
+  .row.book-box
+    あなたの感想投稿をお待ちしています！
