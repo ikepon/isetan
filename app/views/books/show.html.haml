@@ -5,7 +5,7 @@
       %div(class='alert alert-#{key}')
         = "#{value}"
   .col-xs-3
-    = image_tag "agile_rails.jpeg", class: 'img-responsive'
+    = image_tag @book.book_cover.url, class: 'img-responsive'
   .col-xs-9
     -# TODO 読まれた回数、欲しい、予約回数機能実装
       .read

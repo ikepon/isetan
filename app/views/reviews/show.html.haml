@@ -2,7 +2,7 @@
   .col-xs-12
     %h2= @review.title
   .col-xs-3
-    = image_tag "agile_rails.jpeg", class: 'img-responsive'
+    = image_tag @review.book.book_cover.url, class: 'img-responsive'
   .col-xs-9
     %h3.content-title= @review.book.title
     %p

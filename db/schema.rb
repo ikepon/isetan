@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150110024326) do
+ActiveRecord::Schema.define(version: 20150110125632) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150110024326) do
     t.integer  "rental",     default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "book_cover"
   end
 
   add_index "books", ["asin"], name: "index_books_on_asin", unique: true
