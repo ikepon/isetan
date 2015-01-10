@@ -1,26 +1,16 @@
 .row
   .col-xs-12
     %h2 蔵書登録
+    - flash.each do |key, value|
+      %div(class='alert alert-#{key}')
+        = "#{value}"
   .col-xs-8
-    -if @book.errors.any?
-      .alert.alert-danger
-        %ul
-          - @book.errors.full_messages.each do |msg|
-            %lu= msg
-    .text-right.help-block
-      %span.required> ＊
-      は必須です
-    = form_for @book do |f|
+    = form_tag confirm_books_path, method: :post  do
       .form-group
-        = f.label :title
-        %span.required ＊
-        = f.text_field :title, class: 'form-control', required: true, placeholder: 'おもしろい本 1982'
-      .form-group
-        = f.label :asin
-        %span.required ＊
-        = f.text_field :asin, class: 'form-control', required: true, placeholder: '1234567890123'
-        %span ※13桁、ハイフンなしで入力してください
-      = f.submit '登録する', class: 'btn btn-default'
+        ASIN
+        = text_field_tag 'asin', @asin, class: 'form-control', required: true, placeholder: '1234567890123'
+        %span ※10〜13桁、ハイフンなしで入力してください
+      = submit_tag '登録する', class: 'btn btn-default'
   .col-xs-12
     %h3 本の検索
     .search-area
@@ -42,7 +32,7 @@
                 %tr
                   %td
                     - book_image = i.get('MediumImage/URL') || 'no_image_book.gif'
-                    = link_to i.get('DetailPageURL') do
+                    = link_to i.get('DetailPageURL'), target: '_blank' do
                       = image_tag book_image, class: 'img-responsive'
                   %td= i.get('ASIN')
                   %td= i.get('ItemAttributes/Title')

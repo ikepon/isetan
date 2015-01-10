@@ -8,19 +8,40 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = Book.new
-
     @keyword = params[:keyword]
 
     if @keyword.present?
       Amazon::Ecs.debug = true
       @res = Amazon::Ecs.item_search(params[:keyword],
-          :search_index => 'Books',
-          :response_group => 'Medium',
-          :country        => 'jp'
+        search_index:   'Books',
+        response_group: 'Medium',
+        country:        'jp'
       )
     else
       return
+    end
+  end
+
+  def confirm
+    @book = Book.new
+
+    @asin = params[:asin]
+
+    if Book.find_by(asin: @asin)
+      flash.now[:danger] = '既に登録されています。'
+      render 'new' and return
+    else
+      Amazon::Ecs.debug = true
+      @book_info = Amazon::Ecs.item_lookup(
+        @asin,
+        response_group: 'Small, ItemAttributes, Images',
+        country: 'jp'
+      )
+    end
+
+    unless @book_info.items.last.present?
+      flash.now[:danger] = '入力いただいたASINコードに該当する本はありません。'
+      render 'new' and return
     end
   end
 

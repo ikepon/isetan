@@ -1,6 +1,9 @@
 .row
   .col-xs-12
     %h2= @book.title
+    - flash.each do |key, value|
+      %div(class='alert alert-#{key}')
+        = "#{value}"
   .col-xs-3
     = image_tag "agile_rails.jpeg", class: 'img-responsive'
   .col-xs-9
