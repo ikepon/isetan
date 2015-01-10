@@ -12,9 +12,6 @@
     -if params[:controller] == 'front_pages'
       = render 'layouts/main_view'
     .container.contents-area
-      - flash.each do |key, value|
-        %div(class='alert alert-#{key}')
-          = "#{value}"
       .row
         .col-md-8#contents
           = yield
