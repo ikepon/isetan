@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Book < ActiveRecord::Base
   has_many :collections
   has_many :reviews
@@ -6,4 +8,6 @@ class Book < ActiveRecord::Base
 
   validates :title, presence: true
   validates :asin,  presence: true, uniqueness: true, length: { in: 10..13 }
+
+  mount_uploader :book_cover, BookCoverUploader
 end
