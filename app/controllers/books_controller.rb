@@ -32,16 +32,18 @@ class BooksController < ApplicationController
       render 'new' and return
     else
       Amazon::Ecs.debug = true
-      @book_info = Amazon::Ecs.item_lookup(
+      books = Amazon::Ecs.item_lookup(
         @asin,
         response_group: 'Small, ItemAttributes, Images',
         country: 'jp'
       )
     end
 
-    unless @book_info.items.last.present?
+    unless books.items.last.present?
       flash.now[:danger] = '入力いただいたASINコードに該当する本はありません。'
       render 'new' and return
+    else
+      @book_info = books.items.last
     end
   end
 
