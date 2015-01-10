@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141230022423) do
+ActiveRecord::Schema.define(version: 20150110024326) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20141230022423) do
 
   create_table "books", force: true do |t|
     t.string   "title"
-    t.string   "isbn"
+    t.string   "asin"
     t.integer  "wanted",     default: 0, null: false
     t.integer  "read",       default: 0, null: false
     t.integer  "rental",     default: 0, null: false
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20141230022423) do
     t.datetime "updated_at"
   end
 
-  add_index "books", ["isbn"], name: "index_books_on_isbn", unique: true
+  add_index "books", ["asin"], name: "index_books_on_asin", unique: true
   add_index "books", ["title"], name: "index_books_on_title"
 
   create_table "collections", force: true do |t|
