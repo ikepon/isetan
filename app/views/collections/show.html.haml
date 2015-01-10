@@ -1,15 +1,16 @@
-.container
-  .row
-    #contents
-      .col-md-8
-        .row
-          %h2= @collection.book.title
-          %table.table.table-hover
-            %tr
-              %th 欲しい！
-              %th 読まれた回数
-              %th レンタル回数
-            %tr
-              %td.wanted= @collection.book.wanted
-              %td.read= @collection.book.read
-              %td.rental= @collection.book.rental
+.row
+  .col-xs-12
+    %h2= @collection.book.title
+  .col-xs-3
+    = image_tag "agile_rails.jpeg", class: 'img-responsive'
+  .col-xs-9
+    -# TODO 読まれた回数、欲しい、予約回数機能実装
+      .read
+        読まれた回数：
+        = @collection.book.read
+      .wanted
+        欲しい：
+        = @collection.book.wanted
+      .rental
+        れんたる回数：
+        = @collection.book.rental
