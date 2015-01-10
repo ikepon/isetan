@@ -1,18 +1,9 @@
-.container
-  .row
-    #contents
-      .col-md-8
-        .row
-          %h2 News
-          %table.table
-            %tbody
-              %tr
-              %tr
-                %th タイトル
-                %td.news-title
-                  = @news.title
-                  %span.news-date= "(#{@news.created_at.to_formatted_s(:date)})"
-              %tr
-                %th 詳細
-                %td.news-content= @news.content
-          = link_to 'ニュース一覧に戻る', news_index_path, class: "btn btn-default"
+.row
+  .col-xs-8
+    %h2= @news.title
+  .col-xs-4
+    %span.news-date= "(#{@news.created_at.to_formatted_s(:date)})"
+  .col-xs-12
+    %p= @news.content
+  .col-xs-12
+    = link_to 'ニュース一覧に戻る', news_index_path, class: "btn btn-default"

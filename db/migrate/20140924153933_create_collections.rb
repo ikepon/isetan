@@ -1,7 +1,7 @@
 class CreateCollections < ActiveRecord::Migration
   def change
     create_table :collections do |t|
-      t.string :status
+      t.integer :status
       t.date :rented_at
       t.date :returned_at
       t.references :user

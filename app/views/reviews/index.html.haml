@@ -1,31 +1,31 @@
-.container
-  .row
-    #contents
-      .col-md-8
+.row
+  .col-xs-9
+    %h2 読書感想一覧
+  .col-xs-3
+    - transition_path = signed_in? ? new_review_path : login_path
+    = link_to '感想を投稿する', transition_path, class: 'btn btn-default'
+  - if @reviews.exists?
+    - @reviews.each do |review|
+      .col-xs-12.book-box
         .row
-          .col-xs-9
-            %h2 読書感想一覧
+          - if review.created_at >= 3.days.ago.beginning_of_day
+            %span.label.label-danger.tagclip New
           .col-xs-3
-            = link_to '感想を投稿する', new_review_path, class: 'btn btn-default'
-          - @reviews.each do |review|
-            .col-xs-12.book-box
-              .row
-                - if review.created_at >= 3.days.ago.beginning_of_day
-                  %span.label.label-danger.tagclip New
-                .col-xs-3
-                  = image_tag "agile_rails.jpeg", width: "150px"
-                .col-xs-9
-                  %h3.content-title= link_to review.title, review_path(review)
-                  %p
-                    %span.glyphicon.glyphicon-user
-                    = review.user.name
-                    = "評価：#{review.evaluation}"
-                  %p= review.review
-                  - if current_user?(review.user)
-                    = link_to '編集', edit_review_path(review), class: 'btn btn-default'
-                  -# TODO いいね！、読んだことある！はあとで実装
-                    %span.glyphicon.glyphicon-heart-empty
-                    3                  　
-                    %span.glyphicon.glyphicon-pencil
-                    5
-          = paginate @reviews
+            = image_tag "agile_rails.jpeg", class: 'img-responsive'
+          .col-xs-9
+            %h3.content-title= link_to review.title, review_path(review)
+            %p
+              %span.glyphicon.glyphicon-user
+              = review.user.name
+              = "評価：#{review.evaluation}"
+            %p= review.content
+            - if current_user?(review.user)
+              = link_to '編集', edit_review_path(review), class: 'btn btn-default'
+            -# TODO いいね！、読んだことある！はあとで実装
+              %span.glyphicon.glyphicon-heart-empty
+              3                  　
+              %span.glyphicon.glyphicon-pencil
+              5
+    = paginate @reviews
+  - else
+    %p 本を読んだ感想を投稿しましょう！

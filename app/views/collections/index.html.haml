@@ -1,23 +1,26 @@
-.container
-  .row
-    #contents
-      .col-md-8
+.row
+  .col-xs-12
+    %h2 蔵書一覧
+  - if @collections.exists?
+    - @collections.each do |collection|
+      .col-xs-12.book-box
         .row
-          %h2 蔵書一覧
-          %table.table.table-hover
-            - if @collections.exists?
-              - @collections.each do |collection|
-                %tr
-                  %th タイトル
-                  %th 欲しい！
-                  %th 読まれた回数
-                  %th レンタル回数
-                %tr
-                  %td.title
-                    = link_to collection.book.title, collection_path(collection)
-                  %td.wanted= collection.book.wanted
-                  %td.read= collection.book.read
-                  %td.rental= collection.book.rental
-            - else
-              %tr
-                %td 蔵書はありません
+          - if collection.created_at >= 3.days.ago.beginning_of_day
+            %span.label.label-danger.tagclip New
+          .col-xs-3
+            = image_tag "agile_rails.jpeg", class: 'img-responsive'
+          .col-xs-9
+            %h3.content-title= link_to collection.book.title, collection_path(collection)
+            -# TODO 読まれた回数、欲しい、予約回数の実装
+              .read
+                読まれた回数：
+                = collection.book.read
+              .wanted
+                欲しい：
+                = collection.book.wanted
+              .rental
+                レンタル回数
+                = collection.book.rental
+  - else
+    %tr
+      %td 蔵書はありません

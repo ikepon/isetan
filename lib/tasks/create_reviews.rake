@@ -7,7 +7,7 @@ namespace :db do
           user_id: "#{i%3 + 1}",
           book_id: "#{i%15 + 1}",
           title: "#{i + 1} この本は名著ですね！",
-          review: "#{i +1}いや〜、すばらしい！すばらしすぎて言葉がでない。",
+          content: "#{i +1}いや〜、すばらしい！すばらしすぎて言葉がでない。",
           evaluation: "#{i%5 + 1}"
         )
       end
