@@ -16,9 +16,9 @@
         %span.required ＊
         = f.text_field :title, class: 'form-control', required: true, placeholder: 'おもしろい本 1982'
       .form-group
-        = f.label :isbn
+        = f.label :asin
         %span.required ＊
-        = f.text_field :isbn, class: 'form-control', required: true, placeholder: '1234567890123'
+        = f.text_field :asin, class: 'form-control', required: true, placeholder: '1234567890123'
         %span ※13桁、ハイフンなしで入力してください
       = f.submit '登録する', class: 'btn btn-default'
   .col-xs-12
@@ -35,7 +35,7 @@
             %thead
               %tr
                 %th 本
-                %th ISBN
+                %th ASIN
                 %th タイトル
             %tbody
               - @res.items.each do |i|

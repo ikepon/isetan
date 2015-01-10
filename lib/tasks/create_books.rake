@@ -5,7 +5,7 @@ namespace :db do
         FactoryGirl.create(
           :book,
           title: "ステキな本 #{i + 1}",
-          isbn: "12312345#{i%2}#{i%3}#{i%5}#{i%7}#{i%9}",
+          asin: "12312345#{i%2}#{i%3}#{i%5}#{i%7}#{i%9}",
           wanted: "#{i + 1}",
           read: "#{30 - i}",
           rental: "#{i+ 1}",
