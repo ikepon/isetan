@@ -15,5 +15,6 @@
         = f.label :title
         = @book_info.get("ItemAttributes/Title")
         = f.hidden_field :title, value: @book_info.get("ItemAttributes/Title")
+      = f.hidden_field :remote_book_cover_url, value: book_image
       = link_to '戻る', 'javascript: history.back()', class: 'btn btn-default'
       = f.submit '登録する', class: 'btn btn-default'
