@@ -45,7 +45,7 @@
       - if review.created_at >= 3.days.ago.beginning_of_day
         %span.label.label-warning.tagclip New
       .col-xs-3
-        = image_tag "agile_rails.jpeg", class: 'img-responsive'
+        = image_tag review.book.book_cover.url, class: 'img-responsive'
       .col-xs-9.book-info
         %h3.content-title= review.title
         %p= review.book.title
