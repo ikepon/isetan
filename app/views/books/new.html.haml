@@ -1,51 +1,51 @@
-.container
-  .row
-    #contents
-      .col-md-8
-        .row
-          %h2 蔵書登録
-          -if @book.errors.any?
-            .alert.alert-danger
-              %ul
-                - @book.errors.full_messages.each do |msg|
-                  %lu= msg
-          .text-right.help-block
-            %span.required> ＊
-            は必須です
-          = form_for @book do |f|
-            .form-group
-              = f.label :title
-              %span.required ＊
-              = f.text_field :title, class: 'form-control', required: true, placeholder: 'おもしろい本 1982'
-            .form-group
-              = f.label :isbn
-              %span.required ＊
-              = f.text_field :isbn, class: 'form-control', required: true, placeholder: '1234567890123'
-              %span ※13桁、ハイフンなしで入力してください
-            = f.submit '登録する', class: 'btn btn-default'
-
-        .search-area
-          = form_tag new_book_path do
-            .input-group
-              = text_field_tag 'keyword', @keyword, class: 'form-control'
-              %span.input-group-btn
-                = submit_tag '検索', class: 'btn btn-default'
-          - if @res.present? && @res.items.present?
-            .search-results
-              %table.table
-                %thead
-                  %tr
-                    %th 本
-                    %th ISBN
-                    %th タイトル
-                %tbody
-                  - @res.items.each do |i|
-                    %tr
-                      %td
-                        = link_to i.get('DetailPageURL') do
-                          = image_tag i.get('MediumImage/URL')
-                      %td= i.get('ASIN')
-                      %td= i.get('ItemAttributes/Title')
-          - else
-            - if @keyword.present?
-              = "キーワード：#{@keyword} に一致するものはありませんでした。"
+.row
+  .col-xs-12
+    %h2 蔵書登録
+  .col-xs-8
+    -if @book.errors.any?
+      .alert.alert-danger
+        %ul
+          - @book.errors.full_messages.each do |msg|
+            %lu= msg
+    .text-right.help-block
+      %span.required> ＊
+      は必須です
+    = form_for @book do |f|
+      .form-group
+        = f.label :title
+        %span.required ＊
+        = f.text_field :title, class: 'form-control', required: true, placeholder: 'おもしろい本 1982'
+      .form-group
+        = f.label :isbn
+        %span.required ＊
+        = f.text_field :isbn, class: 'form-control', required: true, placeholder: '1234567890123'
+        %span ※13桁、ハイフンなしで入力してください
+      = f.submit '登録する', class: 'btn btn-default'
+  .col-xs-12
+    %h3 本の検索
+    .search-area
+      = form_tag new_book_path do
+        .input-group
+          = text_field_tag 'keyword', @keyword, class: 'form-control'
+          %span.input-group-btn
+            = submit_tag '検索', class: 'btn btn-default'
+      - if @res.present? && @res.items.present?
+        .search-results
+          %table.table
+            %thead
+              %tr
+                %th 本
+                %th ISBN
+                %th タイトル
+            %tbody
+              - @res.items.each do |i|
+                %tr
+                  %td
+                    - book_image = i.get('MediumImage/URL') || 'no_image_book.gif'
+                    = link_to i.get('DetailPageURL') do
+                      = image_tag book_image, class: 'img-responsive'
+                  %td= i.get('ASIN')
+                  %td= i.get('ItemAttributes/Title')
+      - else
+        - if @keyword.present?
+          = "キーワード：#{@keyword} に一致するものはありませんでした。"

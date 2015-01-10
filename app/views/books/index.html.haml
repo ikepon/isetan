@@ -1,27 +1,27 @@
-.container
-  .row
-    #contents
-      .col-md-8
+.row
+  .col-xs-9
+    %h2 蔵書一覧
+  .col-xs-3
+    - transition_path = signed_in? ? new_book_path : login_path
+    = link_to '蔵書を登録する', transition_path, class: 'btn btn-default'
+  - if @books.exists?
+    - @books.each do |book|
+      .col-xs-12.book-box
         .row
-          .col-sm-8
-            %h2 蔵書一覧
-          .col-sm-4
-            - transition_path = signed_in? ? new_book_path : login_path
-            = link_to '蔵書登録', transition_path, class: 'btn btn-default'
-          %table.table.table-hover
-            - if @books.exists?
-              %tr
-                %th タイトル
-                %th 欲しい！
-                %th 読まれた回数
-                %th レンタル回数
-              - @books.each do |book|
-                %tr
-                  %td.title
-                    = link_to book.title, book_path(book)
-                  %td.wanted= book.wanted
-                  %td.read= book.read
-                  %td.rental= book.rental
-            - else
-              %tr
-                %td 蔵書はありません
+          .col-xs-3
+            = image_tag "agile_rails.jpeg", class: 'img-responsive'
+          .col-xs-9
+            %h3.content-title= link_to book.title, book_path(book)
+            -# TODO 読まれた回数、欲しい、予約回数機能実装
+              .read
+                読まれた回数：
+                = book.read
+              .wanted
+                欲しい：
+                = book.wanted
+              .rental
+                レンタル回数
+                = book.rental
+  - else
+    %tr
+      %td 蔵書はありません
