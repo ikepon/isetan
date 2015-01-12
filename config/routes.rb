@@ -8,10 +8,14 @@ Rails.application.routes.draw do
 
   resources :news, only: %i(index show new create)
 
-  resources :books
+  resources :books, only: %i(index show create) do
+    collection do
+      post :confirm
+    end
+  end
 
   match 'collections/new', via: 'post'
-  resources :collections do
+  resources :collections, only: %i(index show new create) do
     collection do
       post :confirm
     end

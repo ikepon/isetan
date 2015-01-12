@@ -27,32 +27,34 @@ class CollectionsController < ApplicationController
 
     @asin = params[:asin]
 
-    if Book.find_by(asin: @asin)
-      flash.now[:danger] = '既に登録されています。'
-      render 'new' and return
-    else
-      Amazon::Ecs.debug = true
-      books = Amazon::Ecs.item_lookup(
-        @asin,
-        response_group: 'Small, ItemAttributes, Images',
-        country: 'jp'
-      )
-    end
+    Amazon::Ecs.debug = true
+    books = Amazon::Ecs.item_lookup(
+      @asin,
+      response_group: 'Small, ItemAttributes, Images',
+      country: 'jp'
+    )
 
     unless books.items.last.present?
       flash.now[:danger] = '入力いただいたASINコードに該当する本はありません。'
       render 'new' and return
+    end
+
+    @book_info = books.items.last
+
+    collection_book = Book.find_by(asin: @asin)
+
+    if collection_book
+      @collection = Collection.new(user_id: current_user.id, book_id: collection_book.id)
     else
-      @book_info = books.items.last
+      render 'books/confirm' and return
     end
   end
 
   def create
-    @book = Book.new(book_params)
-    @book.collections.build(user_id: current_user.id)
-    if @book.save
+    collection = Collection.new(collection_params)
+    if collection.save
       flash[:success] = '蔵書登録しました'
-      redirect_to @book
+      redirect_to book_path(collection.book_id)
     else
       render 'new'
     end
