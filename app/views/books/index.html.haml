@@ -22,6 +22,12 @@
               .rental
                 レンタル回数
                 = book.rental
+            .bg-info.user-images
+              - book.collections.each do |collection|
+                - if collection.user.image?
+                  = image_tag collection.user.image.thumb.url, class: 'img-responsive', alt: collection.user.name, title: collection.user.name
+                - else
+                  = image_tag 'noimage.jpg', class: 'img-responsive', title: collection.user.name
   - else
     %tr
       %td 蔵書はありません

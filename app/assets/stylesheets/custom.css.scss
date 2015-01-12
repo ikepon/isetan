@@ -33,6 +33,14 @@
     margin: -10px 0 -20px 0px;
     font-size: 20px;
   }
+  .book-box {
+    .user-images {
+      padding: 7px;
+      img {
+        height: 40px;
+      }
+    }
+  }
 }
 
 .required {
