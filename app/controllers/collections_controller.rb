@@ -18,4 +18,10 @@ class CollectionsController < ApplicationController
 
   def destroy
   end
+
+  private
+
+  def collection_params
+    params.require(:collection).permit(:user_id, :book_id)
+  end
 end
