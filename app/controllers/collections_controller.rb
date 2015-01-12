@@ -58,15 +58,6 @@ class CollectionsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def upload
-  end
-
-  def destroy
-  end
-
   private
 
   def collection_params

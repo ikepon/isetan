@@ -18,15 +18,6 @@ class BooksController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def upload
-  end
-
-  def destroy
-  end
-
   private
 
   def book_params
