@@ -2,7 +2,7 @@
   .col-xs-9
     %h2 蔵書一覧
   .col-xs-3
-    - transition_path = signed_in? ? new_book_path : login_path
+    - transition_path = signed_in? ? new_collection_path : login_path
     = link_to '蔵書を登録する', transition_path, class: 'btn btn-default'
   - if @books.exists?
     - @books.each do |book|

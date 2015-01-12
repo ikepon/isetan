@@ -5,7 +5,7 @@
       %div(class='alert alert-#{key}')
         = "#{value}"
   .col-xs-8
-    = form_tag confirm_books_path, method: :post  do
+    = form_tag confirm_collections_path, method: :post  do
       .form-group
         ASIN
         = text_field_tag 'asin', @asin, class: 'form-control', required: true, placeholder: '1234567890123'
@@ -14,7 +14,7 @@
   .col-xs-12
     %h3 本の検索
     .search-area
-      = form_tag new_book_path do
+      = form_tag new_collection_path do
         .input-group
           = text_field_tag 'keyword', @keyword, class: 'form-control'
           %span.input-group-btn
