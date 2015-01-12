@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
   before_action :review_user, only: [:edit, :update]
 
   def index
-    @reviews = Review.page(params[:page]).per(7)
+    @reviews = Review.order(created_at: :desc).page(params[:page]).per(7)
   end
 
   def show
