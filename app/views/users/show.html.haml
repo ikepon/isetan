@@ -1,21 +1,18 @@
-.container
-  .row
-    #contents
-      .col-md-8
-        .row
-          %h2 プロフィール
-          - if @user.image?
-            = image_tag @user.image.url, width: '70px'
-          - else
-            = image_tag 'noimage.jpg', width: '70px'
-          %table.table
-            %tbody
-              %tr
-                %th ユーザ名
-                %td.user-name= @user.name
-              %tr
-                %th 自己紹介
-                %td.user-profile= @user.profile
-          = link_to 'ユーザ一覧に戻る', users_path, class: "btn btn-default"
-          - if current_user?(@user)
-            = link_to 'プロフィールを編集する', edit_user_path(@user), class: "btn btn-default"
+.row
+  .col-xs-12
+    %h2 プロフィール
+    - if @user.image?
+      = image_tag @user.image.url, width: '70px'
+    - else
+      = image_tag 'noimage.jpg', width: '70px'
+    %table.table
+      %tbody
+        %tr
+          %th ユーザ名
+          %td.user-name= @user.name
+        %tr
+          %th 自己紹介
+          %td.user-profile= @user.profile
+    = link_to 'ユーザ一覧に戻る', users_path, class: "btn btn-default"
+    - if current_user?(@user)
+      = link_to 'プロフィールを編集する', edit_user_path(@user), class: "btn btn-default"

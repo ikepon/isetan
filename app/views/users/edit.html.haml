@@ -1,8 +1,5 @@
-.container
-  .row
-    #contents
-      .col-md-8
-        .row
-          %h2 プロフィール編集
-          = render 'form'
-          = link_to 'プロフィールへ戻る', user_path(@user), class: "btn btn-default"
+.row
+  .col-xs-12
+    %h2 プロフィール編集
+    = render 'form'
+    = link_to 'プロフィールへ戻る', user_path(@user), class: "btn btn-default"
