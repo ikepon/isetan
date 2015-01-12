@@ -13,6 +13,17 @@
         %tr
           %th 自己紹介
           %td.user-profile= @user.profile
+        %tr
+          %th 蔵書
+          %td.user-collections
+            - if @user.collections.present?
+              - @user.collections.each do |collection|
+                - if collection.book.book_cover?
+                  = image_tag collection.book.book_cover.url, alt: collection.book.title, width: '50'
+                - else
+                  = image_tag 'no_image_book.gif', alt: collection.book.title, width: '50'
+            - else
+              蔵書の登録はありません。
     = link_to 'ユーザ一覧に戻る', users_path, class: "btn btn-default"
     - if current_user?(@user)
       = link_to 'プロフィールを編集する', edit_user_path(@user), class: "btn btn-default"
