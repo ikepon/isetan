@@ -49,6 +49,7 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
+    @book.collections.build(user_id: current_user.id)
     if @book.save
       flash[:success] = '蔵書登録しました'
       redirect_to @book
