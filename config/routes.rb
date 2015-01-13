@@ -5,15 +5,24 @@ Rails.application.routes.draw do
   get 'front_pages/index'
 
   resources :users, only: %i(index show new create edit update)
+
   resources :news, only: %i(index show new create)
-  match 'books/new', via: 'post'
-  resources :books do
+
+  resources :books, only: %i(index show create) do
     collection do
       post :confirm
     end
   end
-  resources :collections
+
+  match 'collections/new', via: 'post'
+  resources :collections, only: %i(index show new create) do
+    collection do
+      post :confirm
+    end
+  end
+
   resources :reviews
+
   resources :contacts, only: %i(new create) do
     collection do
       post :confirm

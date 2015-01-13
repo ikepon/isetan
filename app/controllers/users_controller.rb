@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :correct_user, only: %w(edit update)
 
   def index
-    @users = User.all
+    @users = User.eager_load(:collections)
   end
 
   def show
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
   end
 
   def correct_user
-    @user = User.find(params[:id])
+    @user = User.find(params[:id]).eager_load(:collections)
     redirect_to root_path unless current_user?(@user)
   end
 end

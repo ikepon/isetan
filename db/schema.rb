@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150110125632) do
+ActiveRecord::Schema.define(version: 20150113000403) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20150110125632) do
   end
 
   add_index "collections", ["book_id"], name: "index_collections_on_book_id"
+  add_index "collections", ["user_id", "book_id"], name: "index_collections_on_user_id_and_book_id", unique: true
   add_index "collections", ["user_id"], name: "index_collections_on_user_id"
 
   create_table "contacts", force: true do |t|

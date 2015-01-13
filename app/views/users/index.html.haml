@@ -1,27 +1,34 @@
-.container
-  .row
-    #contents
-      .col-md-8
-        .row
-          %h2 ユーザ一覧
-          %table.table.table-hover
-            %thead
-              %tr
-                %th #
-                %th ユーザ名
-                %th 詳細へ
-            %tbody
-              - if @users
-                - @users.each do |user|
-                  %tr
-                    %td.user-id
-                      = user.id
-                      - if user.image?
-                        = image_tag user.image.thumb.url
-                      - else
-                        = image_tag 'noimage.jpg', size: '50x50'
-                    %td.user-name= user.name
-                    %td.user-profile= link_to 'プロフィールへ', user_path(user)
-              - else
-                %tr
-                  %td 登録しているユーザーはいません。
+.row
+  .col-xs-12
+    %h2 ユーザ一覧
+    %table.table.table-hover
+      %thead
+        %tr
+          %th #
+          %th ユーザ名
+          %th 蔵書
+          %th 詳細へ
+      %tbody
+        - if @users
+          - @users.each do |user|
+            %tr
+              %td.user-id
+                = user.id
+                - if user.image?
+                  = image_tag user.image.thumb.url
+                - else
+                  = image_tag 'noimage.jpg', size: '50x50'
+              %td.user-name= user.name
+              %td.collections.bg-warning
+                - if user.collections.present?
+                  - user.collections.limit(3).each do |collection|
+                    - if collection.book.book_cover?
+                      = image_tag collection.book.book_cover.url, alt: collection.book.title, width: '50'
+                    - else
+                      = image_tag 'no_image_book.gif', alt: collection.book.title, width: '50'
+                - else
+                  蔵書の登録はありません。
+              %td.user-profile= link_to 'プロフィールへ', user_path(user)
+        - else
+          %tr
+            %td 登録しているユーザーはいません。

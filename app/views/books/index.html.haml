@@ -2,7 +2,7 @@
   .col-xs-9
     %h2 蔵書一覧
   .col-xs-3
-    - transition_path = signed_in? ? new_book_path : login_path
+    - transition_path = signed_in? ? new_collection_path : login_path
     = link_to '蔵書を登録する', transition_path, class: 'btn btn-default'
   - if @books.exists?
     - @books.each do |book|
@@ -22,6 +22,12 @@
               .rental
                 レンタル回数
                 = book.rental
+            .bg-info.user-images
+              - book.collections.each do |collection|
+                - if collection.user.image?
+                  = image_tag collection.user.image.thumb.url, class: 'img-responsive', alt: collection.user.name, title: collection.user.name
+                - else
+                  = image_tag 'noimage.jpg', class: 'img-responsive', title: collection.user.name
   - else
     %tr
       %td 蔵書はありません

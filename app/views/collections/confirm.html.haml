@@ -1,0 +1,19 @@
+.row
+  .col-xs-12
+    %h2 登録する本の確認
+  .col-xs-3
+    - book_image = @book_info.get('MediumImage/URL') || 'no_image_book.gif'
+    = link_to @book_info.get('DetailPageURL'), target: '_blank' do
+      = image_tag book_image, class: 'img-responsive'
+  .col-xs-9
+    = form_for @collection do |f|
+      .form-group
+        %p ASIN
+        = @book_info.get('ASIN')
+      .form-group
+        %p Title
+        = @book_info.get("ItemAttributes/Title")
+      = f.hidden_field :user_id
+      = f.hidden_field :book_id
+      = link_to '戻る', 'javascript: history.back()', class: 'btn btn-default'
+      = f.submit '登録する', class: 'btn btn-default'
