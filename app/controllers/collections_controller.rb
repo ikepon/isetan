@@ -23,6 +23,7 @@ class CollectionsController < ApplicationController
   end
 
   def confirm
+    # TODO このアクションのコードは整える
     @book = Book.new
 
     @asin = params[:asin]
@@ -42,8 +43,12 @@ class CollectionsController < ApplicationController
     @book_info = books.items.last
 
     collection_book = Book.find_by(asin: @asin)
+    user_book = Collection.find_by(user_id: current_user.id, book_id: collection_book.try(:id))
 
-    if collection_book
+    if user_book
+      flash.now[:danger] = '既に蔵書登録されています。'
+      render 'new' and return
+    elsif collection_book
       @collection = Collection.new(user_id: current_user.id, book_id: collection_book.id)
     else
       render 'books/confirm' and return
