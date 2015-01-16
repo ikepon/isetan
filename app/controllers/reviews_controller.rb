@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
 
   def new
     @books = Book.order('title')
-    @review = Review.new(user_id: current_user.id)
+    @review = Review.new(user_id: current_user.id, book_id: params[:book_id])
   end
 
   def create
