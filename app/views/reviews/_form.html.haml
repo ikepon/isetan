@@ -1,4 +1,5 @@
-= image_tag @review.book.book_cover.url, class: 'img-responsive'
+- if @review.book.present?
+  = image_tag @review.book.book_cover.url, class: 'img-responsive'
 = form_for(@review) do |f|
   .form-group
     - if params[:action] == 'edit'
