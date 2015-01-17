@@ -1,3 +1,4 @@
+= image_tag @review.book.book_cover.url, class: 'img-responsive'
 = form_for(@review) do |f|
   .form-group
     - if params[:action] == 'edit'
@@ -5,7 +6,7 @@
       %p.form-control-static= @review.book.title
     - else
       = f.label :book_id
-      = f.select :book_id, options_from_collection_for_select(@books, 'id', 'title'), {}, class: 'form-control'
+      = f.select :book_id, options_from_collection_for_select(@books, 'id', 'title', @review.book_id), {}, class: 'form-control'
   .form-group
     = f.label :title
     = f.text_field :title, class: 'form-control'

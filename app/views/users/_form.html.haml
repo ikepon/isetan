@@ -13,12 +13,14 @@
     = f.text_field :email, class: 'form-control', required: true, placeholder: 'user@example.com'
   .form-group
     = f.label :password
-    %span.required ＊
-    = f.password_field :password, class: 'form-control', required: true
+    - if params[:action] == 'new'
+      %span.required ＊
+    = f.password_field :password, class: 'form-control', required: params[:action] == 'new' ? true : false
   .form-group
     = f.label :password_confirmation, "Confirmation"
-    %span.required ＊
-    = f.password_field :password_confirmation, class: 'form-control', required: true
+    - if params[:action] == 'new'
+      %span.required ＊
+    = f.password_field :password_confirmation, class: 'form-control', required: params[:action] == 'new' ? true : false
   .form-group
     = f.label :image
     = image_tag @user.image.thumb.url if @user.image?

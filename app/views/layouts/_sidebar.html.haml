@@ -1,4 +1,4 @@
-- if @sidebar_news && params[:controller] != 'news'
+- if @sidebar_news && params[:controller] == 'front_pages'
   .news
     %h3.content-title News
     - @sidebar_news.each do |news|
