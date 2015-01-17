@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   def update
     # TODO パスワード入力なしでも更新できるように
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = "プロフィールを更新しました"
       redirect_to @user
     else
       render 'edit'
