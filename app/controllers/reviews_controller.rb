@@ -10,6 +10,11 @@ class ReviewsController < ApplicationController
   end
 
   def new
+    if @review = Review.find_by(user_id: current_user.id, book_id: params[:book_id])
+      flash[:warning] = '既に感想を書いています！'
+      render 'show', id: @review and return
+    end
+
     @books = Book.order('title')
     @review = Review.new(user_id: current_user.id, book_id: params[:book_id])
   end
