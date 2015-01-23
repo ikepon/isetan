@@ -1,19 +1,19 @@
-.container
-  .row
-    #contents
-      .col-md-8
-        .login
-          %h2 ログイン
-          = form_for :session, url: sessions_path do |f|
-            .form-group
-              = f.label :email
-              = f.text_field :email, class: 'form-control', required: true, placeholder: 'user@example.com'
-            .form-group
-              = f.label :password
-              = f.password_field :password, class: 'form-control', required: true
-            = f.submit 'Login', class: 'btn btn-primary'
-          %p
-            = link_to 'ユーザー登録する', signup_path, class: "btn btn-default"
-            .help-block ※ユーザー登録がまだの方はこちらからご登録ください。
-          %p
-            = link_to 'TOPへ戻る', root_path, class: "btn btn-default"
+.col-xs-10
+  .login
+    %h2 ログイン
+    - flash.each do |key, value|
+      %div(class='alert alert-#{key}')
+        = "#{value}"
+    = form_for :session, url: sessions_path do |f|
+      .form-group
+        = f.label :email
+        = f.text_field :email, class: 'form-control', required: true, placeholder: 'user@example.com'
+      .form-group
+        = f.label :password
+        = f.password_field :password, class: 'form-control', required: true
+      = f.submit 'Login', class: 'btn btn-primary'
+    %p
+      = link_to 'ユーザー登録する', signup_path, class: "btn btn-default"
+      .help-block ※ユーザー登録がまだの方はこちらからご登録ください。
+    %p
+      = link_to 'TOPへ戻る', root_path, class: "btn btn-default"
