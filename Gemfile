@@ -20,6 +20,7 @@ gem 'kaminari'
 
 gem 'amazon-ecs'
 
+gem 'eventmachine', github: 'eventmachine/eventmachine', branch: :master
 # image
 gem 'carrierwave'
 gem 'rmagick'
