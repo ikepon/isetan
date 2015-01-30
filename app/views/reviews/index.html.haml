@@ -20,7 +20,7 @@
               = "評価：#{review.evaluation}"
             %p= review.content
             - if current_user?(review.user)
-              = link_to '編集', edit_review_path(review), class: 'btn btn-default'
+              = link_to '編集', edit_review_path(review), class: 'btn btn-default edit-btn'
             -# TODO いいね！、読んだことある！はあとで実装
               %span.glyphicon.glyphicon-heart-empty
               3                  　

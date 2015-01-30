@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :review do
     user nil
     book nil
-    title "この本は名著ですね！"
+    sequence(:title) { |n| "この本は名著です#{n}" }
     content "いや〜、すばらしい！すばらしすぎて言葉がでない。"
     evaluation 5
 
