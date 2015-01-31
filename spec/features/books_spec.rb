@@ -77,9 +77,57 @@ feature '蔵書', js: true do
 
         click_link 'この本の感想を書く'
 
-      expect(page).to have_css('h2', text: '読書感想 投稿')
+        expect(page).to have_css('h2', text: '読書感想 投稿')
         expect(find_field('Book').value).to eq collection8.book.id.to_s
       end
+    end
+  end
+
+  context '蔵書登録ページ' do
+    # TODO collections_spec を作ったら、このテストをどこに置くのか検討
+    include_context 'ユーザーとしてログインしている'
+
+    background do
+      visit new_collection_path
+    end
+
+    scenario '新規の蔵書を登録し、同じ本を登録しようとするとエラーになる' do
+      expect(page).to have_css('h2', text: '蔵書登録')
+
+      fill_in 'asin', with: '4839941874'
+
+      click_on '登録する'
+
+      expect(page).to have_css('h2', text: '登録する本の確認')
+      within '#new_book' do
+        expect(page).to have_content('4839941874')
+        expect(page).to have_content('よくわかるJavaScriptの教科書')
+      end
+
+      click_on '登録する'
+
+      expect(page).to have_css('h2', text: 'よくわかるJavaScriptの教科書')
+      expect(page).to have_css('.alert.alert-success', text: '蔵書登録しました')
+      expect(page.find('.user-images img')['title']).to have_content(current_user.name)
+
+      # ここからエラーチェック
+      visit new_collection_path
+
+      fill_in 'asin', with: '4839941874'
+
+      click_on '登録する'
+
+      expect(page).to have_css('h2', text: '蔵書登録')
+      expect(page).to have_css('.alert.alert-danger', text: '既に蔵書登録されています。')
+    end
+
+    scenario '適当なASINコードを入力するとエラーになる' do
+      fill_in 'asin', with: '1234567890'
+
+      click_on '登録する'
+
+      expect(page).to have_css('h2', text: '蔵書登録')
+      expect(page).to have_css('.alert.alert-danger', text: '入力いただいたASINコードに該当する本はありません。')
     end
   end
 end
