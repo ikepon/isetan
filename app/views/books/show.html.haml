@@ -24,4 +24,7 @@
         - else
           = image_tag 'noimage.jpg', class: 'img-responsive', title: collection.user.name
     .btn-area
-      = link_to 'この本の感想を書く', new_review_path(book_id: @book), class: 'btn btn-default'
+      - if signed_in?
+        = link_to 'この本の感想を書く', new_review_path(book_id: @book), class: 'btn btn-default'
+      - else
+        = link_to 'この本の感想を書く', login_path, class: 'btn btn-default'
