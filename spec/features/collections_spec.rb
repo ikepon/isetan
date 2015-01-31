@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 feature '蔵書管理' do
+  pending 'collectionの扱いが決まるまでpendingします' do
   scenario 'TOPページからの蔵書ページに遷移する' do
     visit root_path
 
@@ -50,5 +51,6 @@ feature '蔵書管理' do
 
     # TODO HOT, NEW とかが出てきたらテスト書く
     # 予約機能実装時にテスト書く
+  end
   end
 end
