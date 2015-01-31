@@ -81,4 +81,63 @@ feature '読書感想', js: true do
       expect(page).to have_css('a.edit-btn', text: '編集')
     end
   end
+
+  context '感想投稿ページ' do
+    context 'ログインしていない場合' do
+      background do
+        visit reviews_path
+      end
+
+      scenario '感想を投稿するボタンをクリックするとログイン画面に遷移する' do
+        click_link '感想を投稿する'
+
+        expect(page).to have_css('h2', text: 'ログイン')
+      end
+    end
+
+    context 'ログインいている場合' do
+      include_context 'ユーザーとしてログインしている'
+
+      let!(:book) { create(:book, title: '自分の信じる自分を信じろ') }
+
+      background do
+        visit reviews_path
+      end
+
+      scenario '感想を投稿するボタンをクリックすると投稿ページに遷移して感想を書ける' do
+        click_link '感想を投稿する'
+
+        expect(page).to have_css('h2', text: '読書感想 投稿')
+
+        select '自分の信じる自分を信じろ', from: 'review_book_id'
+        fill_in 'review[title]', with: 'グレンラガン！'
+        fill_in 'review[content]', with: '兄貴最高！'
+        fill_in 'review[evaluation]', with: '5'
+
+        click_on '投稿する'
+
+        expect(page).to have_css('h2', text: '読書感想一覧')
+        expect(page).to have_css('h3', text: 'グレンラガン！')
+      end
+
+      scenario 'タイトル、本文にバリデーションが適用される' do
+        visit new_review_path
+
+        click_on '投稿する'
+
+        within '.alert.alert-danger' do
+          expect(page).to have_css('ul li', text: "Title can't be blank")
+          expect(page).to have_css('ul li', text: "Content can't be blank")
+        end
+
+        fill_in 'review[title]', with: '本' * 51
+
+        click_on '投稿する'
+
+        within '.alert.alert-danger' do
+          expect(page).to have_css('ul li', text: "Title is too long (maximum is 50 characters)")
+        end
+      end
+    end
+  end
 end

@@ -26,6 +26,7 @@ class ReviewsController < ApplicationController
       flash[:success] = '感想を投稿しました'
       redirect_to reviews_path
     else
+      @books = Book.order('title')
       render :new
     end
   end
