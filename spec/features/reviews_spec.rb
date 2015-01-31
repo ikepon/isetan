@@ -140,4 +140,35 @@ feature '読書感想', js: true do
       end
     end
   end
+
+  context '感想編集ページ' do
+    include_context 'ユーザーとしてログインしている'
+
+    let!(:review) { create(:review, :review_whatever, title: 'ログインユーザの感想', content: 'この本は読んだほうがいい！', evaluation: 5, user_id: current_user.id) }
+
+    background do
+      visit reviews_path
+    end
+
+    scenario '編集ページに遷移して、編集できる' do
+      expect(page).to have_css('h2', text: '読書感想一覧')
+
+      click_link '編集'
+
+      expect(page).to have_css('h2', text: '読書感想 編集')
+
+      expect(page).to have_content(review.book.title)
+
+      expect(find('#review_title').value).to eq 'ログインユーザの感想'
+      expect(find('#review_content').value).to eq 'この本は読んだほうがいい！'
+      expect(find('#review_evaluation').value).to eq '5'
+
+      fill_in 'review[title]', with: '編集したタイトル'
+
+      click_on '投稿する'
+
+      expect(page).to have_css('h2', text: '編集したタイトル')
+      expect(page).to have_css('.alert.alert-success', text: '感想を更新しました')
+    end
+  end
 end
