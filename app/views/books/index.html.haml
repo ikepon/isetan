@@ -28,6 +28,7 @@
                   = image_tag collection.user.image.thumb.url, class: 'img-responsive', alt: collection.user.name, title: collection.user.name
                 - else
                   = image_tag 'noimage.jpg', class: 'img-responsive', title: collection.user.name
+    = paginate @books
   - else
     %tr
       %td 蔵書はありません

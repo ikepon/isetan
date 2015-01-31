@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :book do
-    title 'ステキな本'
+    sequence(:title) { |n| "ステキな本#{n}" }
     sequence(:asin) { |n| "123456789#{n}" }
     wanted 1
     read 3
