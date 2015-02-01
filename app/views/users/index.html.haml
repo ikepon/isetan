@@ -1,24 +1,23 @@
 .row
   .col-xs-12
     %h2 ユーザ一覧
-    %table.table.table-hover
-      %thead
-        %tr
-          %th #
-          %th ユーザ名
-          %th 蔵書
-          %th 詳細へ
-      %tbody
-        - if @users
+    - if @users
+      %table.table.table-hover
+        %thead
+          %tr
+            %th #
+            %th ユーザ名
+            %th 蔵書
+        %tbody
           - @users.each do |user|
             %tr
               %td.user-id
                 = user.id
                 - if user.image?
-                  = image_tag user.image.thumb.url
+                  = link_to image_tag(user.image.thumb.url), user_path(user)
                 - else
-                  = image_tag 'noimage.jpg', size: '50x50'
-              %td.user-name= user.name
+                  = link_to image_tag('noimage.jpg', size: '50x50'), user_path(user)
+              %td.user-name= link_to user.name, user_path(user)
               %td.collections.bg-warning
                 - if user.collections.present?
                   - user.collections.limit(3).each do |collection|
@@ -28,7 +27,6 @@
                       = image_tag 'no_image_book.gif', alt: collection.book.title, width: '50'
                 - else
                   蔵書の登録はありません。
-              %td.user-profile= link_to 'プロフィールへ', user_path(user)
-        - else
-          %tr
-            %td 登録しているユーザーはいません。
+        = paginate @users
+    - else
+      %p 登録しているユーザーはいません。
