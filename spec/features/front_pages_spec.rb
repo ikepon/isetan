@@ -18,6 +18,7 @@ feature "トップページ" do
       expect(page).to have_css('ul.nav.navbar-nav li', text: '読書感想')
       expect(page).to have_css('ul.nav.navbar-nav li', text: '蔵書')
       # expect(page).to have_css('ul.nav.navbar-nav li', text: '予約')
+      expect(page).to have_css('ul.nav.navbar-nav li', text: 'Users')
       expect(page).to have_css('ul.nav.navbar-nav li', text: 'お問合せ')
       expect(page).to have_css('ul.nav.navbar-nav li', text: 'Login')
     end
@@ -84,10 +85,6 @@ feature "トップページ" do
 
     background do
       visit root_path
-    end
-
-    scenario "グローバルナビにUserが表示されている" do
-      expect(page).to have_css('ul.nav.navbar-nav.navbar-right li', text: 'Users')
     end
 
     scenario "メインビューにボタンが表示されている" do
