@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   def index
-    @books = Book.order(created_at: :desc).eager_load(:collections)
+    @books = Book.order(created_at: :desc).eager_load(:collections).page(params[:page]).per(7)
   end
 
   def show

@@ -9,18 +9,15 @@
       =link_to 'Isetan', root_path, class: 'navbar-brand'
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li
-          = link_to '読書感想', reviews_path
-        %li.active
-          = link_to '蔵書', books_path
+        %li= link_to '読書感想', reviews_path
+        %li.active= link_to '蔵書', books_path
         -# TODO 予約機能実装
           %li
             %a{href: "#"} 予約
-        %li
-          = link_to 'お問合せ', new_contact_path
+        %li=link_to 'Users', users_path
+        %li= link_to 'お問合せ', new_contact_path
       %ul.nav.navbar-nav.navbar-right
         - if signed_in?
-          %li=link_to 'Users', users_path
           %li.dropdown
             =link_to '#', class: 'dropdown-toggle', 'data-toggle' => 'dropdown' do
               = current_user.name

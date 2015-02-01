@@ -4,7 +4,7 @@ feature 'ログイン、ログアウト' do
   context 'ログインする' do
     let!(:user) { create(:user) }
 
-    before do
+    background do
       visit login_path
     end
 
@@ -44,15 +44,15 @@ feature 'ログイン、ログアウト' do
 
       expect(page).to have_css('.alert', text: 'メールアドレス、パスワードの組み合わせに誤りがあります。')
     end
+  end
 
-    context 'ログアウトする' do
-      include_context 'ユーザーとしてログインしている'
+  context 'ログアウトする' do
+    include_context 'ユーザーとしてログインしている'
 
-      scenario 'ログインした状態で、ログアウトする' do
-        find('.dropdown-menu a', text: 'Logout').click
+    scenario 'ログインした状態で、ログアウトする' do
+      find('.dropdown-menu a', text: 'Logout').click
 
-        expect(page).to have_css('h2', text: '蔵書管理 isetan')
-      end
+      expect(page).to have_css('h2', text: '蔵書管理 isetan')
     end
   end
 end

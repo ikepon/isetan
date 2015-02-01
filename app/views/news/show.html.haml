@@ -4,6 +4,6 @@
   .col-xs-4
     %span.news-date= "(#{@news.created_at.to_formatted_s(:date)})"
   .col-xs-12
-    %p= @news.content
+    %p.news-content= @news.content
   .col-xs-12
     = link_to 'ニュース一覧に戻る', news_index_path, class: "btn btn-default"

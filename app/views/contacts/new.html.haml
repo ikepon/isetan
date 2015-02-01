@@ -11,8 +11,9 @@
         = f.label :category
         = f.collection_radio_buttons :category, %w(ユーザ登録について 機能について その他), :to_s, :to_s do |b|
           %p
-            = b.radio_button
-            = b.text
+            %label
+              = b.radio_button
+              = b.text
       .form-group
         = f.label :name
         = f.text_field :name, class: 'form-control'
