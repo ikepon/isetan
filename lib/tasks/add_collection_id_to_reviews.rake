@@ -11,7 +11,7 @@ namespace :add_data do
           collection = Collection.create!(user_id: review.user_id, book_id: review.book_id)
         end
 
-        review.update!(collection_id: collection)
+        review.update!(collection_id: collection.id)
       end
     end
 
