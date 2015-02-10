@@ -1,10 +1,11 @@
 .row
   .col-xs-12
     %h2 読書感想 投稿
-    -if @review.errors.any?
-      .alert.alert-danger
-        %ul
-          - @review.errors.full_messages.each do |msg|
-            %li= msg
   .col-xs-8
-    = render 'form'
+    - if @collections.present?
+      = render 'form'
+    - else
+      %p
+        登録されている蔵書がありません。
+        以下より感想を書く蔵書を登録してください。
+      = link_to '蔵書を登録する', new_collection_path, class: 'btn btn-default'
