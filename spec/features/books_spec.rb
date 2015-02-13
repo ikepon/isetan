@@ -56,32 +56,8 @@ feature '蔵書', js: true do
       expect(page).to have_css('h2', text: collection8.book.title)
       expect(page.find('.user-images img')['title']).to have_content(collection8.user.name)
     end
-
-    scenario 'ログインしていない場合、詳細ページの感想を書くボタンでログインページに遷移する' do
-      expect(page).to have_css('h2', text: '蔵書一覧')
-
-      click_link collection8.book.title
-
-      click_link 'この本の感想を書く'
-
-      expect(page).to have_css('h2', text: 'ログイン')
-    end
-
-    context 'ログインしている場合' do
-      include_context 'ユーザーとしてログインしている'
-
-      scenario '詳細ページの感想を書くボタンで、reviewページに遷移する'do
-        visit books_path
-
-        click_link collection8.book.title
-
-        click_link 'この本の感想を書く'
-
-        expect(page).to have_css('h2', text: '読書感想 投稿')
-        expect(find_field('Book').value).to eq collection8.book.id.to_s
-      end
-    end
   end
+
   pending 'アマゾンの検索でエラーになるので、一旦保留' do
   context '蔵書登録ページ' do
     # TODO collections_spec を作ったら、このテストをどこに置くのか検討
@@ -131,4 +107,5 @@ feature '蔵書', js: true do
     end
   end
   end
+
 end

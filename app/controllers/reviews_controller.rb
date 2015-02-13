@@ -22,7 +22,8 @@ class ReviewsController < ApplicationController
       flash[:success] = '感想を投稿しました'
       redirect_to reviews_path
     else
-      @books = Book.order('title')
+      @collections = current_user.books.pluck(:title, :id)
+
       render :new
     end
   end
@@ -44,7 +45,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:user_id, :book_id, :title, :content, :evaluation)
+    params.require(:review).permit(:title, :content, :evaluation, :collection_id)
   end
 
   def review_user

@@ -4,12 +4,16 @@ feature '読書感想', js: true do
   context '感想一覧ページ' do
     include_context 'ユーザーとしてログインしている'
 
+    # TODO book、collection、review 周りはまとめる
+    let!(:book) { create(:book, title: '自分の信じる自分を信じろ') }
+    let!(:collection) { create(:collection, book_id: book.id, user_id: current_user.id) }
+
     background do
       1.upto(7).each do |i|
         create(:review, :review_whatever, title: "素敵な本#{i}")
       end
 
-      create(:review, :review_whatever, title: '最高の本', user_id: current_user.id)
+      create(:review, title: '最高の本', collection_id: collection.id)
 
       visit reviews_path
     end
@@ -51,7 +55,10 @@ feature '読書感想', js: true do
   context '感想詳細ページ' do
     include_context 'ユーザーとしてログインしている'
 
-    let!(:review) { create(:review, :review_whatever, title: '最高の本') }
+    let!(:book) { create(:book, title: '自分の信じる自分を信じろ') }
+    let!(:collection) { create(:collection, book_id: book.id, user_id: current_user.id) }
+    let!(:review) { create(:review, title: '最高の本', collection_id: collection.id) }
+    let!(:other_user_review) { create(:review, :review_whatever, title: 'おもしろい本') }
 
     background do
       visit reviews_path
@@ -69,14 +76,14 @@ feature '読書感想', js: true do
     end
 
     scenario 'ログインしているユーザが書いた感想の編集ボタンは本人のみ表示される' do
-      create(:review, :review_whatever, title: 'ログインユーザの感想', user_id: current_user.id)
+      create(:review, :review_whatever, title: 'ログインユーザの感想')
 
-      click_link '最高の本'
+      click_link 'おもしろい本'
 
       expect(page).not_to have_css('a.edit-btn', text: '編集')
 
       click_link '読書感想'
-      click_link 'ログインユーザの感想'
+      click_link '最高の本'
 
       expect(page).to have_css('a.edit-btn', text: '編集')
     end
@@ -95,10 +102,12 @@ feature '読書感想', js: true do
       end
     end
 
-    context 'ログインいている場合' do
+    context 'ログインしている場合' do
       include_context 'ユーザーとしてログインしている'
 
       let!(:book) { create(:book, title: '自分の信じる自分を信じろ') }
+      let!(:collection) { create(:collection, book_id: book.id, user_id: current_user.id) }
+      let!(:review) { create(:review, title: '最高の本', collection_id: collection.id) }
 
       background do
         visit reviews_path
@@ -109,7 +118,7 @@ feature '読書感想', js: true do
 
         expect(page).to have_css('h2', text: '読書感想 投稿')
 
-        select '自分の信じる自分を信じろ', from: 'review_book_id'
+        select '自分の信じる自分を信じろ', from: 'review_collection_id'
         fill_in 'review[title]', with: 'グレンラガン！'
         fill_in 'review[content]', with: '兄貴最高！'
         fill_in 'review[evaluation]', with: '5'
@@ -144,7 +153,10 @@ feature '読書感想', js: true do
   context '感想編集ページ' do
     include_context 'ユーザーとしてログインしている'
 
-    let!(:review) { create(:review, :review_whatever, title: 'ログインユーザの感想', content: 'この本は読んだほうがいい！', evaluation: 5, user_id: current_user.id) }
+    let!(:book) { create(:book, title: '自分の信じる自分を信じろ') }
+    let!(:collection) { create(:collection, book_id: book.id, user_id: current_user.id) }
+    let!(:review) { create(:review, title: 'ログインユーザの感想', content: 'この本は読んだほうがいい！', evaluation: 5, collection_id: collection.id) }
+
 
     background do
       visit reviews_path
@@ -157,7 +169,7 @@ feature '読書感想', js: true do
 
       expect(page).to have_css('h2', text: '読書感想 編集')
 
-      expect(page).to have_content(review.book.title)
+      expect(page).to have_content('自分の信じる自分を信じろ')
 
       expect(find('#review_title').value).to eq 'ログインユーザの感想'
       expect(find('#review_content').value).to eq 'この本は読んだほうがいい！'
