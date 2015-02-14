@@ -5,7 +5,7 @@
       %div(class='alert alert-#{key}')
         = "#{value}"
   .col-xs-3
-    = image_tag @book.book_cover.url, class: 'img-responsive'
+    = @book.cover_image
   .col-xs-9.book-box
     -# TODO 読まれた回数、欲しい、予約回数機能実装
       .read

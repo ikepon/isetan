@@ -9,7 +9,7 @@
       .col-xs-12.book-box
         .row
           .col-xs-3
-            = image_tag book.book_cover.url, class: 'img-responsive'
+            = book.cover_image
           .col-xs-9
             %h3.content-title= link_to book.title, book_path(book)
             -# TODO 読まれた回数、欲しい、予約回数機能実装
