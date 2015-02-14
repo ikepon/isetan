@@ -1,8 +1,8 @@
 .row
-  .col-xs-8
-    %h2= @news.title
-  .col-xs-4
-    %span.news-date= "(#{@news.created_at.to_formatted_s(:date)})"
+  .col-xs-12
+    %h2
+      = @news.title
+      %span.small= "#{@news.created_at.to_formatted_s(:date)}"
   .col-xs-12
     %p.news-content= @news.content
   .col-xs-12
