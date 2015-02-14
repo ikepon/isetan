@@ -4,10 +4,11 @@
     - flash.each do |key, value|
       %div(class='alert alert-#{key}')
         = "#{value}"
-    - if @user.image?
-      = image_tag @user.image.url, width: '70px'
-    - else
-      = image_tag 'noimage.jpg', width: '70px'
+    .profile-image
+      - if @user.image?
+        = image_tag @user.image.url, width: '70px'
+      - else
+        = image_tag 'noimage.jpg', width: '70px'
     %table.table
       %tbody
         %tr

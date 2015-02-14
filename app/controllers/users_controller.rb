@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :correct_user, only: %w(edit update)
 
   def index
-    @users = User.eager_load(:collections).order(created_at: :desc).page(params[:page]).per(7)
+    @users = User.where.not(id: current_user).eager_load(:collections).order(created_at: :desc).page(params[:page]).per(7)
   end
 
   def show
