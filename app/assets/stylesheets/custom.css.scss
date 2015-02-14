@@ -67,11 +67,16 @@
 }
 
 // users
-.profile-image {
-  width: 70px;
-  height: 70px;
-  border: solid 1px #ccc;
-  vertical-align: middle;
+.profile-image{
+    width: 70px;
+    height: 70px;
+    border: solid 1px #ccc;
+    display:table;
+    text-align: center;
+}
+.profile-image > *{
+    display:table-cell;
+    vertical-align: middle;
 }
 
 // footer
