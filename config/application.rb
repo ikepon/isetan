@@ -17,7 +17,8 @@ module Isetan
         controller_specs: false,
         request_specs:    false
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
-      config.assets.paths << "#{Rails}/vender/assets/fonts"
     end
+    config.assets.paths << "#{Rails}/vender/assets/fonts"
+    config.i18n.default_locale = :ja
   end
 end
