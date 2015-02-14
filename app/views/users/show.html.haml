@@ -5,10 +5,7 @@
       %div(class='alert alert-#{key}')
         = "#{value}"
     .profile-image
-      - if @user.image?
-        = image_tag @user.image.url, width: '70px'
-      - else
-        = image_tag 'noimage.jpg', width: '70px'
+      = @user.profile_image
     %table.table
       %tbody
         %tr

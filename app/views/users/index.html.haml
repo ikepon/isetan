@@ -13,18 +13,15 @@
             %tr
               %td.user-id
                 = user.id
-                - if user.image?
-                  = link_to image_tag(user.image.thumb.url), user_path(user)
-                - else
-                  = link_to image_tag('noimage.jpg', size: '50x50'), user_path(user)
+                = link_to user.profile_image, user_path(user)
               %td.user-name= link_to user.name, user_path(user)
               %td.collections.bg-warning
-                - if user.collections.present?
-                  - user.collections.limit(3).each do |collection|
-                    - if collection.book.book_cover?
-                      = image_tag collection.book.book_cover.url, alt: collection.book.title, width: '50'
+                - if user.books.present?
+                  - user.books.limit(3).each do |book|
+                    - if book.book_cover?
+                      = image_tag book.book_cover.url, alt: book.title, width: '50'
                     - else
-                      = image_tag 'no_image_book.gif', alt: collection.book.title, width: '50'
+                      = image_tag 'no_image_book.gif', alt: book.title, width: '50'
                 - else
                   蔵書の登録はありません。
         = paginate @users
