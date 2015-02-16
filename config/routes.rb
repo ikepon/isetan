@@ -6,6 +6,11 @@ Rails.application.routes.draw do
 
   resources :users, only: %i(index show new create edit update)
 
+  namespace :mypage do
+    root to: 'profile#edit'
+    resources :profile, only: %i(edit update), controller: :profile
+  end
+
   resources :news, only: %i(index show new create)
 
   resources :books, only: %i(index show create) do

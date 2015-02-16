@@ -18,7 +18,7 @@
         %li= link_to 'お問合せ', new_contact_path
       %ul.nav.navbar-nav.navbar-right
         - if signed_in?
-          %li= link_to 'マイページ', current_user
+          %li= link_to 'マイページ', mypage_root_path
           %li=link_to 'Logout', logout_path, method: 'delete'
         - else
           %li=link_to 'Login', login_path
