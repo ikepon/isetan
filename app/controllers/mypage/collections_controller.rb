@@ -1,6 +1,10 @@
-class CollectionsController < ApplicationController
+class Mypage::CollectionsController < ApplicationController
+  before_action :signed_in_user, only: %w(edit update)
+
+  layout 'mypage'
+
   def index
-    @collections = Collection.all
+    @collections = current_user.collections
   end
 
   def show

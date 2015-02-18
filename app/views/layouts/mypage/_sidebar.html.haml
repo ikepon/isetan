@@ -1,5 +1,10 @@
 .mypage-menu
-  = link_to mypage_root_path do
-    %i.glyphicon.glyphicon-home
-    ホーム
-
+  %ul.list-group
+    %li.list-group-item
+      = link_to mypage_root_path do
+        %i.glyphicon.glyphicon-home
+        ホーム
+    %li.list-group-item
+      = link_to mypage_collections_path do
+        %i.glyphicon.glyphicon-book
+        蔵書

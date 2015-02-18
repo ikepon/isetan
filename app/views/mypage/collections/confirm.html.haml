@@ -6,7 +6,7 @@
     = link_to @book_info.get('DetailPageURL'), target: '_blank' do
       = image_tag book_image, class: 'img-responsive'
   .col-xs-9
-    = form_for @collection do |f|
+    = form_for [:mypage, @collection] do |f|
       .form-group
         %p ASIN
         = @book_info.get('ASIN')

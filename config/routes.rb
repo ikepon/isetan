@@ -9,18 +9,18 @@ Rails.application.routes.draw do
   namespace :mypage do
     root to: 'profile#edit'
     resources :profile, only: %i(edit update), controller: :profile
+
+    match 'collections/new', via: 'post'
+    resources :collections, only: %i(index show new create) do
+      collection do
+        post :confirm
+      end
+    end
   end
 
   resources :news, only: %i(index show new create)
 
   resources :books, only: %i(index show create) do
-    collection do
-      post :confirm
-    end
-  end
-
-  match 'collections/new', via: 'post'
-  resources :collections, only: %i(index show new create) do
     collection do
       post :confirm
     end
