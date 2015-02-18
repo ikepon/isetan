@@ -1,5 +1,8 @@
 .row
   .col-xs-12
+    - flash.each do |key, value|
+      %div(class='alert alert-#{key}')
+        = "#{value}"
     %h2 ホーム
     .text-right.help-block
       %span.required> ＊
