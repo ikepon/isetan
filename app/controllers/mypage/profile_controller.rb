@@ -8,10 +8,10 @@ class Mypage::ProfileController < ApplicationController
   end
 
   def update
-    # TODO パスワード入力なしでも更新できるように
+    @user = current_user
     if @user.update_attributes(user_params)
       flash[:success] = "プロフィールを更新しました"
-      redirect_to @user
+      redirect_to edit_mypage_profile_url
     else
       render 'edit'
     end
