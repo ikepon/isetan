@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   has_many :collections
   has_many :books, through: :collections
+  has_many :reviews, through: :collections
 
   with_options presence: true do |required|
     required.validates :name, length: { maximum: 50 }
