@@ -16,17 +16,19 @@ Rails.application.routes.draw do
         post :confirm
       end
     end
+
+    resources :reviews, only: %i(index show new create edit update)
   end
 
-  resources :news, only: %i(index show new create)
+  resources :news, only: %i(index show)
 
-  resources :books, only: %i(index show create) do
+  resources :books, only: %i(index show) do
     collection do
       post :confirm
     end
   end
 
-  resources :reviews
+  resources :reviews, only: %i(index show)
 
   resources :contacts, only: %i(new create) do
     collection do
