@@ -1,0 +1,25 @@
+-if @review.errors.any?
+  .alert.alert-danger
+    %ul
+      - @review.errors.full_messages.each do |msg|
+        %li= msg
+- if @review.collection.present?
+  = image_tag @review.book.book_cover.url, class: 'img-responsive'
+= form_for [:mypage, @review] do |f|
+  .form-group
+    - if params[:action] == 'edit'
+      %p 本のタイトル
+      %p.form-control-static= @review.book.title
+    - else
+      = f.label :collection_id
+      = f.select :collection_id, options_for_select(@collections), {}, class: 'form-control', selected: @book_id
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+  .form-group
+    = f.label :content
+    = f.text_area :content, class: 'form-control'
+  .form-group
+    = f.label :evaluation
+    = f.text_field :evaluation, class: 'form-control'
+  = f.submit '投稿する', class: 'btn btn-primary'
