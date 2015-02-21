@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     root to: 'profile#edit'
     resources :profile, only: %i(edit update), controller: :profile
 
+    resources :books, only: %i(create)
+
     match 'collections/new', via: 'post'
     resources :collections, only: %i(index show new create) do
       collection do
@@ -22,11 +24,7 @@ Rails.application.routes.draw do
 
   resources :news, only: %i(index show)
 
-  resources :books, only: %i(index show) do
-    collection do
-      post :confirm
-    end
-  end
+  resources :books, only: %i(index show)
 
   resources :reviews, only: %i(index show)
 

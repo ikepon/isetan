@@ -1,7 +1,7 @@
 .row
   .col-xs-12
     %h2 蔵書一覧
-  - if @books.exists?
+  - if @books.present?
     - @books.each do |book|
       .col-xs-12.book-box
         .row

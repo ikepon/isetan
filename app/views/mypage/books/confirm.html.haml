@@ -1,0 +1,20 @@
+.row
+  .col-xs-12
+    %h2 登録する本の確認
+  .col-xs-3
+    - book_image = @book_info.get('MediumImage/URL') || 'no_image_book.gif'
+    = link_to @book_info.get('DetailPageURL'), target: '_blank' do
+      = image_tag book_image, class: 'img-responsive'
+  .col-xs-9
+    = form_for [:mypage, @book] do |f|
+      .form-group
+        = f.label :asin
+        = @book_info.get('ASIN')
+        = f.hidden_field :asin, value: @book_info.get('ASIN')
+      .form-group
+        = f.label :title
+        = @book_info.get("ItemAttributes/Title")
+        = f.hidden_field :title, value: @book_info.get("ItemAttributes/Title")
+      = f.hidden_field :remote_book_cover_url, value: book_image
+      = link_to '戻る', 'javascript: history.back()', class: 'btn btn-default'
+      = f.submit '登録する', class: 'btn btn-default'

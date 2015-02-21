@@ -4,7 +4,7 @@ class Mypage::CollectionsController < ApplicationController
   layout 'mypage'
 
   def index
-    @collections = current_user.collections
+    @collections = current_user.collections.order(created_at: :desc)
   end
 
   def show
@@ -55,7 +55,8 @@ class Mypage::CollectionsController < ApplicationController
     elsif collection_book
       @collection = Collection.new(user_id: current_user.id, book_id: collection_book.id)
     else
-      render 'books/confirm' and return
+      # Book に登録がない場合はCollectionと合わせて登録している
+      render 'mypage/books/confirm' and return
     end
   end
 
@@ -63,7 +64,7 @@ class Mypage::CollectionsController < ApplicationController
     collection = Collection.new(collection_params)
     if collection.save
       flash[:success] = '蔵書登録しました'
-      redirect_to book_path(collection.book_id)
+      redirect_to mypage_collection_path(collection)
     else
       render 'new'
     end
