@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :book_page
+
   def index
     @books = Book.order(created_at: :desc).eager_load(:collections).page(params[:page]).per(7)
   end
@@ -22,5 +24,9 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :asin, :book_cover, :remote_book_cover_url)
+  end
+
+  def book_page
+    @book_page = true
   end
 end
