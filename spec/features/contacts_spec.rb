@@ -47,9 +47,9 @@ feature 'お問い合わせページ', js: true do
       expect(page).to have_css('h2', text: 'お問合せ')
 
       within '.alert.alert-danger' do
-        expect(page).to have_content("Name can't be blank")
-        expect(page).to have_content("Email can't be blank")
-        expect(page).to have_content("Content can't be blank")
+        expect(page).to have_content('Nameを入力してください。')
+        expect(page).to have_content('Emailを入力してください。')
+        expect(page).to have_content('Contentを入力してください。')
       end
     end
 
@@ -62,8 +62,8 @@ feature 'お問い合わせページ', js: true do
       expect(page).to have_css('h2', text: 'お問合せ')
 
       within '.alert.alert-danger' do
-        expect(page).to have_content("Name is too long (maximum is 50 characters)")
-        expect(page).to have_content("Email is too long (maximum is 255 characters)")
+        expect(page).to have_content('Nameは50文字以内で入力してください。')
+        expect(page).to have_content('Emailは255文字以内で入力してください。')
       end
 
     end

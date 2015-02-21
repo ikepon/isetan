@@ -34,7 +34,7 @@ feature 'サインアップ' do
     click_on '登録する'
 
     expect(page).to have_css('h2', text: 'ユーザー登録')
-    expect(page).to have_content("Password is too short (minimum is 6 characters)")
+    expect(page).to have_content('Passwordは6文字以上で入力してください。')
   end
 
   scenario 'パスワードがconfirmと一致しないとエラーがでる' do
@@ -50,7 +50,7 @@ feature 'サインアップ' do
     click_on '登録する'
 
     expect(page).to have_css('h2', text: 'ユーザー登録')
-    expect(page).to have_content("Password confirmation doesn't match Password")
+    expect(page).to have_content('Password confirmationとPasswordの入力が一致しません。')
   end
 
   scenario '既に登録されたemailの場合、エラーがでる' do
@@ -66,6 +66,6 @@ feature 'サインアップ' do
     click_on '登録する'
 
     expect(page).to have_css('h2', text: 'ユーザー登録')
-    expect(page).to have_content("Email has already been taken")
+    expect(page).to have_content('Emailはすでに存在します。')
   end
 end

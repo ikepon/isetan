@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature '蔵書', js: true do
-  # collection で作る本のタイトルは、"ステキな本#{i}"
+  # collection で作る本のタイトルは、'ステキな本#{i}'
   let!(:collection1) { create(:collection, :collection_whatever) }
   let!(:collection2) { create(:collection, :collection_whatever) }
   let!(:collection3) { create(:collection, :collection_whatever) }
@@ -51,7 +51,9 @@ feature '蔵書', js: true do
     scenario 'タイトルをクリックすると詳細ページに遷移して必要項目が表示される' do
       expect(page).to have_css('h2', text: '蔵書一覧')
 
-      click_link collection8.book.title
+      within '#contents' do
+        click_link collection8.book.title
+      end
 
       expect(page).to have_css('h2', text: collection8.book.title)
       expect(page.find('.user-images img')['title']).to have_content(collection8.user.name)

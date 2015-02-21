@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'ログイン、ログアウト' do
+feature 'ログイン、ログアウト', js: true do
   context 'ログインする' do
     let!(:user) { create(:user) }
 
@@ -16,11 +16,8 @@ feature 'ログイン、ログアウト' do
         click_on 'Login'
       end
 
-      expect(page).to have_css('.user-name', text: user.name)
-      expect(page).to have_link('Profile', href: user_path(user))
-      expect(page).to have_link('Logout', href: logout_path)
-      expect(page).not_to have_link('Login', href: login_path)
-
+      expect(page).to have_css('h2', text: 'ホーム')
+      expect(page).to have_xpath("//input[@id='user_name'][@value='#{user.name}']")
     end
 
     scenario '間違ったemailを入れるとログインできない' do
@@ -50,7 +47,7 @@ feature 'ログイン、ログアウト' do
     include_context 'ユーザーとしてログインしている'
 
     scenario 'ログインした状態で、ログアウトする' do
-      find('.dropdown-menu a', text: 'Logout').click
+      find('.navbar-right a', text: 'Logout').click
 
       expect(page).to have_css('h2', text: '蔵書管理 isetan')
     end

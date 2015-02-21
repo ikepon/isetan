@@ -2,11 +2,10 @@ require 'spec_helper'
 
 feature '読書感想', js: true do
   context '感想一覧ページ' do
-    include_context 'ユーザーとしてログインしている'
-
     # TODO book、collection、review 周りはまとめる
+    let(:user) { create(:user, name: 'kamina') }
     let!(:book) { create(:book, title: '自分の信じる自分を信じろ') }
-    let!(:collection) { create(:collection, book_id: book.id, user_id: current_user.id) }
+    let!(:collection) { create(:collection, book_id: book.id, user_id: user.id) }
 
     background do
       1.upto(7).each do |i|
@@ -38,26 +37,13 @@ feature '読書感想', js: true do
 
       expect(page).to have_css('.book-box .content-title:nth-child(1)', text: '素敵な本1')
     end
-
-    scenario 'ログインユーザーの書いたレビューのみ編集できる' do
-      within '#contents' do
-        expect(page).to have_css('a.edit-btn', count: 1)
-
-        click_link '編集'
-
-        expect(page).to have_css('h2', text: '読書感想 編集')
-
-        expect(find_field('Title').value).to eq '最高の本'
-      end
-    end
   end
 
   context '感想詳細ページ' do
-    include_context 'ユーザーとしてログインしている'
-
+    let(:user) { create(:user, name: 'kamina') }
     let!(:book) { create(:book, title: '自分の信じる自分を信じろ') }
-    let!(:collection) { create(:collection, book_id: book.id, user_id: current_user.id) }
-    let!(:review) { create(:review, title: '最高の本', collection_id: collection.id) }
+    let!(:collection) { create(:collection, book_id: book.id, user_id: user.id) }
+    let!(:review) { create(:review, title: '最高の本です！', content: '熱い気持ちになる最高のアニメ', collection_id: collection.id) }
     let!(:other_user_review) { create(:review, :review_whatever, title: 'おもしろい本') }
 
     background do
@@ -67,36 +53,21 @@ feature '読書感想', js: true do
     scenario '詳細ページに遷移して、必要項目が表示されている' do
       expect(page).to have_css('h2', text: '読書感想一覧')
 
-      click_link '最高の本'
+      within '#contents' do
+        click_link '最高の本'
+      end
 
       expect(page).to have_css('h2', text: '最高の本')
-      expect(page).to have_css('h3', text: review.book.title)
-      expect(page).to have_content(review.user.name)
-      expect(page).to have_content(review.content)
-    end
-
-    scenario 'ログインしているユーザが書いた感想の編集ボタンは本人のみ表示される' do
-      create(:review, :review_whatever, title: 'ログインユーザの感想')
-
-      click_link 'おもしろい本'
-
-      expect(page).not_to have_css('a.edit-btn', text: '編集')
-
-      click_link '読書感想'
-      click_link '最高の本'
-
-      expect(page).to have_css('a.edit-btn', text: '編集')
+      expect(page).to have_css('h3', text: '自分の信じる自分を信じろ')
+      expect(page).to have_content('kamina')
+      expect(page).to have_content('熱い気持ちになる最高のアニメ')
     end
   end
 
   context '感想投稿ページ' do
     context 'ログインしていない場合' do
-      background do
-        visit reviews_path
-      end
-
-      scenario '感想を投稿するボタンをクリックするとログイン画面に遷移する' do
-        click_link '感想を投稿する'
+      scenario 'マイページの感想ページに遷移するとログイン画面に遷移する' do
+        visit mypage_reviews_path
 
         expect(page).to have_css('h2', text: 'ログイン')
       end
@@ -110,7 +81,7 @@ feature '読書感想', js: true do
       let!(:review) { create(:review, title: '最高の本', collection_id: collection.id) }
 
       background do
-        visit reviews_path
+        visit mypage_reviews_path
       end
 
       scenario '感想を投稿するボタンをクリックすると投稿ページに遷移して感想を書ける' do
@@ -125,18 +96,18 @@ feature '読書感想', js: true do
 
         click_on '投稿する'
 
-        expect(page).to have_css('h2', text: '読書感想一覧')
-        expect(page).to have_css('h3', text: 'グレンラガン！')
+        expect(page).to have_css('.alert-success', text: '感想を投稿しました')
+        expect(page).to have_css('h2', text: 'グレンラガン！')
       end
 
       scenario 'タイトル、本文にバリデーションが適用される' do
-        visit new_review_path
+        click_link '感想を投稿する'
 
         click_on '投稿する'
 
         within '.alert.alert-danger' do
-          expect(page).to have_css('ul li', text: "Title can't be blank")
-          expect(page).to have_css('ul li', text: "Content can't be blank")
+          expect(page).to have_css('ul li', text: 'Titleを入力してください。')
+          expect(page).to have_css('ul li', text: 'Contentを入力してください。')
         end
 
         fill_in 'review[title]', with: '本' * 51
@@ -144,7 +115,7 @@ feature '読書感想', js: true do
         click_on '投稿する'
 
         within '.alert.alert-danger' do
-          expect(page).to have_css('ul li', text: "Title is too long (maximum is 50 characters)")
+          expect(page).to have_css('ul li', text: "Titleは50文字以内で入力してください。")
         end
       end
     end
@@ -157,9 +128,12 @@ feature '読書感想', js: true do
     let!(:collection) { create(:collection, book_id: book.id, user_id: current_user.id) }
     let!(:review) { create(:review, title: 'ログインユーザの感想', content: 'この本は読んだほうがいい！', evaluation: 5, collection_id: collection.id) }
 
+    let!(:other_collection) { create(:collection, :collection_whatever) }
+    let!(:other_review) { create(:review, title: '他ユーザの感想', content: '他ユーザの感想だよ', evaluation: 5, collection_id: other_collection.id) }
+
 
     background do
-      visit reviews_path
+      visit mypage_reviews_path
     end
 
     scenario '編集ページに遷移して、編集できる' do
@@ -181,6 +155,12 @@ feature '読書感想', js: true do
 
       expect(page).to have_css('h2', text: '編集したタイトル')
       expect(page).to have_css('.alert.alert-success', text: '感想を更新しました')
+    end
+
+    scenario '他ユーザーの書いたレビューは編集できない' do
+      edit_mypage_review_path(other_review)
+
+      expect(page).to have_css('h2', text: '読書感想一覧')
     end
   end
 end
