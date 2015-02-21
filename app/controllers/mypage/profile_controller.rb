@@ -1,5 +1,5 @@
 class Mypage::ProfileController < ApplicationController
-  before_action :signed_in_user, only: %w(edit update)
+  before_action :signed_in_user
 
   layout 'mypage'
 
@@ -21,12 +21,5 @@ class Mypage::ProfileController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile, :image, :image_cache, :sign_in_count, :current_sign_in_at)
-  end
-
-  def signed_in_user
-    unless signed_in?
-      store_location
-      redirect_to login_url, notice: "ログインしてください"
-    end
   end
 end

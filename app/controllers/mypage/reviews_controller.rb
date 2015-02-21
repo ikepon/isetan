@@ -1,4 +1,5 @@
 class Mypage::ReviewsController < ApplicationController
+  before_action :signed_in_user
   before_action :review_user, only: [:edit, :update]
 
   layout 'mypage'

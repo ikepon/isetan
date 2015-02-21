@@ -1,5 +1,5 @@
 class Mypage::CollectionsController < ApplicationController
-  before_action :signed_in_user, only: %w(edit update)
+  before_action :signed_in_user
 
   layout 'mypage'
 
