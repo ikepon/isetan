@@ -7,7 +7,7 @@ class Mypage::BooksController < ApplicationController
     if book.save
       flash[:success] = '蔵書登録しました'
       @collection = Collection.where(book_id: book.id, user_id: current_user.id)
-      redirect_to mypage_collection_path(@collection.id)
+      redirect_to mypage_collections_path
     else
       render 'confirm'
     end

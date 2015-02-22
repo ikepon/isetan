@@ -3,6 +3,9 @@
     %h2 蔵書一覧
   .col-xs-3
     = link_to '蔵書を登録する', new_mypage_collection_path, class: 'btn btn-default'
+  - flash.each do |key, value|
+    .col-xs-12(class='alert alert-#{key}')
+      = "#{value}"
   - if @collections.exists?
     - @collections.each do |collection|
       .col-xs-12.book-box
