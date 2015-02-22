@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
   resources :reviews, only: %i(index show)
 
+  resources :lends, only: %i(index show)
+
   resources :contacts, only: %i(new create) do
     collection do
       post :confirm
