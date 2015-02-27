@@ -11,19 +11,20 @@
           - if collection.created_at >= 3.days.ago.beginning_of_day
             %span.label.label-danger.tagclip New
           .col-xs-3
-            = image_tag collection.book.book_cover.url, class: 'img-responsive'
+            = link_to lend_path(collection) do
+              = image_tag collection.book.book_cover.url, class: 'img-responsive'
           .col-xs-9
-            %h3.content-title= link_to collection.book.title, mypage_collection_path(collection)
-            -# TODO 読まれた回数、欲しい、予約回数の実装
-              .read
-                読まれた回数：
-                = collection.book.read
+            %h3.content-title= link_to collection.book.title, lend_path(collection)
+            .read
+              読まれた回数：
+              = collection.book.read
+            .rental
+              レンタル回数
+              = collection.book.rental
+            -# TODO 欲しい機能の実装
               .wanted
                 欲しい：
                 = collection.book.wanted
-              .rental
-                レンタル回数
-                = collection.book.rental
   - else
     %tr
       %td 蔵書はありません

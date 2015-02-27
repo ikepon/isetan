@@ -1,2 +1,29 @@
-%h1 Lends#show
-%p Find me in app/views/lends/show.html.haml
+.row
+  .col-xs-12
+    %h2= @book.title
+  - flash.each do |key, value|
+    .col-xs-12(class='alert alert-#{key}')
+      = "#{value}"
+  .col-xs-12.book-box
+    .row
+      - if @collection.created_at >= 3.days.ago.beginning_of_day
+        %span.label.label-danger.tagclip New
+      .col-xs-3
+        = image_tag @book.book_cover.url, class: 'img-responsive'
+      .col-xs-9
+        .read
+          読まれた回数：
+          = @book.read
+        .rental
+          レンタル回数
+          = @book.rental
+        -# TODO 欲しい機能の実装
+          .wanted
+            欲しい：
+            = @book.wanted
+        %ul.bg-info.user-images.list-inline
+          - @book.collections.each do |collection|
+            - if collection.user.image?
+              %li= image_tag collection.user.image.thumb.url, class: 'img-responsive', alt: collection.user.name, title: collection.user.name
+            - else
+              %li= image_tag 'noimage.jpg', class: 'img-responsive', title: collection.user.name
