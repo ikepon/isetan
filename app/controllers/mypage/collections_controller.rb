@@ -70,9 +70,26 @@ class Mypage::CollectionsController < ApplicationController
     end
   end
 
+  def edit
+    @collection = Collection.find(params[:id])
+  end
+
+  def update
+    @collection = Collection.find(params[:id])
+    @collection.status = '貸出中'
+    @collection.rental += 1
+
+    if @collection.update_attributes(collection_params)
+      flash[:success] = "本の貸出が完了しました。返却日時は#{@collection.returned_at}"
+      redirect_to lend_path(@collection)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def collection_params
-    params.require(:collection).permit(:user_id, :book_id)
+    params.require(:collection).permit(:status, :rented_at, :returned_at, :user_id, :book_id, :rental)
   end
 end

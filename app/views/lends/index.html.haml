@@ -15,12 +15,12 @@
               = image_tag collection.book.book_cover.url, class: 'img-responsive'
           .col-xs-9
             %h3.content-title= link_to collection.book.title, lend_path(collection)
-            .read
-              読まれた回数：
-              = collection.book.read
+            .status
+              貸出状況：
+              = collection.status
             .rental
               レンタル回数
-              = collection.book.rental
+              = collection.rental
             -# TODO 欲しい機能の実装
               .wanted
                 欲しい：

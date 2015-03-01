@@ -1,0 +1,17 @@
+.row
+  .col-xs-12
+    %h2 本の貸出
+    - flash.each do |key, value|
+      %div(class='alert alert-#{key}')
+        = "#{value}"
+  .col-xs-8
+    = form_for [:mypage, @collection]  do |f|
+      - t = Time.zone.now
+      .form-group
+        = f.label :rented_at
+        = f.text_field :rented_at, value: t.to_s(:date), disabled: true, class: 'form-control'
+      .form-group
+        = f.label :returned_at
+        = f.text_field :returned_at, value: Time.local(t.year, t.month, t.day, 10) + 7.days, class: 'form-control'
+        ※ 【 2015/03/01 10:00 】のフォーマットで記入してください。
+      = f.submit '登録する', class: 'btn btn-default'
