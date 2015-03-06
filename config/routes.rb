@@ -16,8 +16,11 @@ Rails.application.routes.draw do
     resources :collections, only: %i(index show new create edit update) do
       collection do
         post :confirm
+        post :return
       end
     end
+
+    resources :lends, only: %i(index)
 
     resources :reviews, only: %i(index show new create edit update)
   end
