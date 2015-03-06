@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   before_create :create_remember_token
 
   has_many :collections
+  has_many :collections, foreign_key: 'borrower_id'
   has_many :books, through: :collections
   has_many :reviews, through: :collections
 
