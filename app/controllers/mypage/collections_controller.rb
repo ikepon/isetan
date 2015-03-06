@@ -90,6 +90,6 @@ class Mypage::CollectionsController < ApplicationController
   private
 
   def collection_params
-    params.require(:collection).permit(:status, :rented_at, :returned_at, :user_id, :book_id, :rental)
+    params.require(:collection).permit(:status, :rented_at, :returned_at, :user_id, :book_id, :rental, :borrower_id)
   end
 end

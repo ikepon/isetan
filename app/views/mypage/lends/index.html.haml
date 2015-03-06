@@ -1,0 +1,31 @@
+.row
+  .col-xs-12
+    %h2 レンタル本
+  - flash.each do |key, value|
+    .col-xs-12(class='alert alert-#{key}')
+      = "#{value}"
+  - if @rentals.exists?
+    - @rentals.each do |rental|
+      .col-xs-12.book-box
+        .row
+          - if rental.created_at >= 3.days.ago.beginning_of_day
+            %span.label.label-danger.tagclip New
+          .col-xs-3
+            = link_to lend_path(rental) do
+              = image_tag rental.book.book_cover.url, class: 'img-responsive'
+          .col-xs-9
+            %h3.content-title= link_to rental.book.title, lend_path(rental)
+            .status
+              貸出状況：
+              = rental.status
+            .rental
+              レンタル回数
+              = rental.rental
+            -# TODO 欲しい機能の実装
+              .wanted
+                欲しい：
+                = rental.book.wanted
+    = paginate @rentals
+  - else
+    %tr
+      %td 蔵書はありません
