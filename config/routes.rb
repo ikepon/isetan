@@ -13,10 +13,14 @@ Rails.application.routes.draw do
     resources :books, only: %i(create)
 
     match 'collections/new', via: 'post'
-    resources :collections, only: %i(index show new create edit update) do
+    resources :collections, only: %i(index show new create edit) do
       collection do
         post :confirm
-        post :return
+      end
+
+      member do
+        patch :rend
+        patch :return
       end
     end
 

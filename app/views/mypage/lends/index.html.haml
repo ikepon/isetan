@@ -18,14 +18,18 @@
             .status
               貸出状況：
               = rental.status
-            .rental
-              レンタル回数
-              = rental.rental
+            .rented_at
+              レンタル日：
+              = rental.rented_at
+            .returned_at
+              返却日：
+              = rental.returned_at
             -# TODO 欲しい機能の実装
               .wanted
                 欲しい：
                 = rental.book.wanted
+            = link_to '返却', [:return_mypage, rental], method: :patch, data: {confirm: "#{rental.book.title}を返却しますか？"}, class: "btn btn-danger"
     = paginate @rentals
   - else
     %tr
-      %td 蔵書はありません
+      %td レンタル本はありません

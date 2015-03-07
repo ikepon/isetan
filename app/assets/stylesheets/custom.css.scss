@@ -17,6 +17,15 @@
 .contents-area {
   .book-box {
     margin-bottom: 40px;
+    .user-images {
+      padding: 7px;
+      img {
+        height: 40px;
+      }
+    }
+    .returned_at {
+      color: red;
+    }
   }
   h2 {
     margin-top: 0px;
@@ -32,14 +41,6 @@
     vertical-align: middle;
     margin: -10px 0 -20px 0px;
     font-size: 20px;
-  }
-  .book-box {
-    .user-images {
-      padding: 7px;
-      img {
-        height: 40px;
-      }
-    }
   }
 }
 

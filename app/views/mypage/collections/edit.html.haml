@@ -5,12 +5,10 @@
       %div(class='alert alert-#{key}')
         = "#{value}"
   .col-xs-8
-    = form_for [:mypage, @collection]  do |f|
+    = form_for [:rend_mypage, @collection] do |f|
       - t = Time.zone.now
       .form-group
         = f.label :returned_at
         = f.text_field :returned_at, value: Time.local(t.year, t.month, t.day, 10) + 7.days, class: 'form-control'
         ※ 【 2015/03/01 10:00 】のフォーマットで記入してください。
-      = f.hidden_field :rented_at, value: t.to_s(:date)
-      = f.hidden_field :borrower_id, value: current_user.id
       = f.submit '登録する', class: 'btn btn-default'

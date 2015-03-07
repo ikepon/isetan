@@ -74,14 +74,31 @@ class Mypage::CollectionsController < ApplicationController
     @collection = Collection.find(params[:id])
   end
 
-  def update
+  def rend
     @collection = Collection.find(params[:id])
     @collection.status = '貸出中'
     @collection.rental += 1
+    @collection.rented_at = Time.zone.now
+    @collection.borrower_id = current_user.id
 
     if @collection.update_attributes(collection_params)
       flash[:success] = "本の貸出が完了しました。返却日時は#{@collection.returned_at}"
       redirect_to lend_path(@collection)
+    else
+      render :edit
+    end
+  end
+
+  def return
+    @collection = Collection.find(params[:id])
+    @collection.status = '貸出可'
+    @collection.rented_at = ''
+    @collection.returned_at = ''
+    @collection.borrower_id = ''
+
+    if @collection.save
+      flash[:success] = "本を返却処理が完了しました。"
+      redirect_to mypage_lends_path
     else
       render :edit
     end
