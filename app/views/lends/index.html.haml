@@ -18,6 +18,8 @@
             .status
               貸出状況：
               = collection.status
+              - unless collection.status == '貸出可'
+                .returned_at= "返却日：#{collection.returned_at}"
             .rental
               レンタル回数
               = collection.rental
@@ -25,6 +27,14 @@
               .wanted
                 欲しい：
                 = collection.book.wanted
+            .rend
+              - if signed_in?
+                - if collection.status == '貸出可'
+                  = link_to '本を借りる', [:edit_mypage, collection], class: 'btn btn-default'
+                - else
+                  .collection-status.label.label-info 貸出中
+              - else
+                = link_to '本を借りる', login_path, class: 'btn btn-default'
     = paginate @company_collections
   - else
     %tr

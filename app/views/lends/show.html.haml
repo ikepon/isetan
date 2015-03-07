@@ -22,7 +22,7 @@
               - if status == '貸出可'
                 = status
               - else
-                = "返却日：#{@collection.returned_at}"
+                .returned_at= "返却日：#{@collection.returned_at}"
             -# TODO 欲しい機能の実装
               .wanted
                 欲しい：
@@ -35,11 +35,12 @@
                 .collection-status.label.label-info 貸出中
             - else
               = link_to '本を借りる', login_path, class: 'btn btn-default'
-        %ul.bg-info.user-images.list-inline
-          - @book.collections.each do |collection|
-            - if collection.user.image?
-              %li= image_tag collection.user.image.thumb.url, class: 'img-responsive', alt: collection.user.name, title: collection.user.name
+        - if @collection.borrower_id.present?
+          .borrower
+            レンタルユーザー
+            - if @collection.borrower.image?
+              = image_tag @collection.borrower.image.thumb.url, class: 'img-responsive', alt: @collection.borrower.name, title: @collection.borrower.name
             - else
-              %li= image_tag 'noimage.jpg', class: 'img-responsive', title: collection.user.name
+              = image_tag 'noimage.jpg', class: 'img-responsive', title: @collection.borrower.name
       .col-xs-12
-        = link_to '本の貸出一覧に戻る', lends_path, class: 'btn btn-default'
+        = link_to '本の貸出一覧に戻る', lends_path, class: 'btn btn-default return-btn'
