@@ -29,7 +29,7 @@ feature 'Newsページ' do
         expect(page).not_to have_css('h3', text: 'News')
       end
 
-      click_link '蔵書'
+      click_link 'みんなの蔵書'
 
       within '#sidebar' do
         expect(page).not_to have_css('h3', text: 'News')

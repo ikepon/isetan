@@ -19,12 +19,12 @@
               .rental
                 レンタル回数
                 = book.rental
-            .bg-info.user-images
+            %ul.bg-info.user-images.list-inline
               - book.collections.each do |collection|
                 - if collection.user.image?
-                  = image_tag collection.user.image.thumb.url, class: 'img-responsive', alt: collection.user.name, title: collection.user.name
+                  %li= image_tag collection.user.image.thumb.url, class: 'img-responsive', alt: collection.user.name, title: collection.user.name
                 - else
-                  = image_tag 'noimage.jpg', class: 'img-responsive', title: collection.user.name
+                  %li= image_tag 'noimage.jpg', class: 'img-responsive', title: collection.user.name
     = paginate @books
   - else
     %tr
