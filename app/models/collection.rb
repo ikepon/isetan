@@ -5,7 +5,7 @@ class Collection < ActiveRecord::Base
   has_many :reviews
 
   # ステータス: reservable: 予約可, rented: 貸出中, expired: 返却遅延
-  enum status: {na: 0, '貸出可': 1, '貸出中': 2, '返却遅延中': 3}
+  enum status: {na: 0, reservable: 1, rented: 2, expired: 3}
 
   scope :rental_books, -> { where(user_id: User.company_account)}
 end

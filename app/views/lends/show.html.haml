@@ -17,10 +17,9 @@
               レンタル回数：
               = @collection.rental
             .status
-              貸出状況：
               - status = @collection.status
-              - if status == '貸出可'
-                = status
+              - if status == 'reservable'
+                = "貸出状況：" + t("collections.#{status}")
               - else
                 .returned_at= "返却日：#{@collection.returned_at}"
             -# TODO 欲しい機能の実装
@@ -29,7 +28,7 @@
                 = @book.wanted
           .col-xs-4
             - if signed_in?
-              - if status == '貸出可'
+              - if status == 'reservable'
                 = link_to '本を借りる', [:edit_mypage, @collection], class: 'btn btn-default'
               - else
                 .collection-status.label.label-info 貸出中

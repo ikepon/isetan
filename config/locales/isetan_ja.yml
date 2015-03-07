@@ -1,0 +1,5 @@
+ja:
+  collections:
+    reservable: 貸出可
+    rented: 貸出中
+    expired: 返却遅延中

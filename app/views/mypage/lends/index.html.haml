@@ -17,7 +17,7 @@
             %h3.content-title= link_to rental.book.title, lend_path(rental)
             .status
               貸出状況：
-              = rental.status
+              = t("collections.#{rental.status}")
             .rented_at
               レンタル日：
               = rental.rented_at
