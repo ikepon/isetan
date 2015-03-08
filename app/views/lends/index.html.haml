@@ -28,13 +28,12 @@
                 欲しい：
                 = collection.book.wanted
             .rend
-              - if signed_in?
-                - if collection.status == 'reservable'
-                  = link_to '本を借りる', [:edit_mypage, collection], class: 'btn btn-default'
-                - else
-                  .collection-status.label.label-info 貸出中
+              - translation_path = signed_in? ? url_for([:edit_mypage, collection]) : login_path
+
+              - if collection.status == 'reservable'
+                = link_to '本を借りる', translation_path, class: 'btn btn-default'
               - else
-                = link_to '本を借りる', login_path, class: 'btn btn-default'
+                .collection-status.label.label-info 貸出中
     = paginate @company_collections
   - else
     %tr

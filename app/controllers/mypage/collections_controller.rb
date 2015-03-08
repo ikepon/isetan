@@ -76,13 +76,13 @@ class Mypage::CollectionsController < ApplicationController
 
   def rend
     @collection = Collection.find(params[:id])
-    @collection.status = '貸出中'
+    @collection.status = 'rented'
     @collection.rental += 1
     @collection.rented_at = Time.zone.now
     @collection.borrower_id = current_user.id
 
     if @collection.update_attributes(collection_params)
-      flash[:success] = "本の貸出が完了しました。返却日時は#{@collection.returned_at}"
+      flash[:success] = "本の貸出が完了しました。返却日は#{@collection.returned_at}です。"
       redirect_to lend_path(@collection)
     else
       render :edit
@@ -91,7 +91,7 @@ class Mypage::CollectionsController < ApplicationController
 
   def return
     @collection = Collection.find(params[:id])
-    @collection.status = '貸出可'
+    @collection.status = 'reservable'
     @collection.rented_at = ''
     @collection.returned_at = ''
     @collection.borrower_id = ''

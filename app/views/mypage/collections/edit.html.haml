@@ -4,6 +4,10 @@
     - flash.each do |key, value|
       %div(class='alert alert-#{key}')
         = "#{value}"
+  .col-xs-12
+    %h3= @collection.book.title
+  .col-xs-3
+    = image_tag @collection.book.book_cover.url, class: 'img-responsive'
   .col-xs-8
     = form_for [:rend_mypage, @collection] do |f|
       - t = Time.zone.now
@@ -11,4 +15,4 @@
         = f.label :returned_at
         = f.text_field :returned_at, value: Time.local(t.year, t.month, t.day, 10) + 7.days, class: 'form-control'
         ※ 【 2015/03/01 10:00 】のフォーマットで記入してください。
-      = f.submit '登録する', class: 'btn btn-default'
+      = f.submit 'この本を借りる', class: 'btn btn-success'
