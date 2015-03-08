@@ -1,0 +1,40 @@
+.row
+  .col-xs-12
+    %h2 本の貸出
+  - flash.each do |key, value|
+    .col-xs-12(class='alert alert-#{key}')
+      = "#{value}"
+  - if @company_collections.exists?
+    - @company_collections.each do |collection|
+      .col-xs-12.book-box
+        .row
+          - if collection.created_at >= 3.days.ago.beginning_of_day
+            %span.label.label-danger.tagclip New
+          .col-xs-3
+            = link_to lend_path(collection) do
+              = image_tag collection.book.book_cover.url, class: 'img-responsive'
+          .col-xs-9
+            %h3.content-title= link_to collection.book.title, lend_path(collection)
+            .status
+              貸出状況：
+              = t("collections.#{collection.status}")
+              - unless collection.status == 'reservable'
+                .returned_at= "返却日：#{collection.returned_at}"
+            .rental
+              レンタル回数
+              = collection.rental
+            -# TODO 欲しい機能の実装
+              .wanted
+                欲しい：
+                = collection.book.wanted
+            .rend
+              - translation_path = signed_in? ? url_for([:edit_mypage, collection]) : login_path
+
+              - if collection.status == 'reservable'
+                = link_to '本を借りる', translation_path, class: 'btn btn-default'
+              - else
+                .collection-status.label.label-info 貸出中
+    = paginate @company_collections
+  - else
+    %tr
+      %td 蔵書はありません

@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
   before_create :create_remember_token
 
   has_many :collections
-  has_many :reviews
+  has_many :books, through: :collections
+  has_many :reviews, through: :collections
 
   with_options presence: true do |required|
     required.validates :name, length: { maximum: 50 }
@@ -15,6 +16,8 @@ class User < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   has_secure_password
+
+  scope :company_account, -> { where(role: 2) }
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64

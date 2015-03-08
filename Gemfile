@@ -17,6 +17,7 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'dotenv-rails'
 
 gem 'kaminari'
+gem 'active_decorator'
 
 gem 'amazon-ecs'
 

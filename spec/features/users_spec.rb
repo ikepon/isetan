@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'Userページ' do
+feature 'Userページ', js: true do
   context 'ログイン前' do
     background do
       1.upto(8).each do |i|
@@ -40,7 +40,8 @@ feature 'Userページ' do
     scenario '一覧ページからユーザネームをクリックして詳細ページに遷移する' do
       visit users_path
 
-      click_link 'user8'
+      # user8 をクリック
+      first('.user-name a').trigger 'click'
 
       expect(page).to have_css('h2', text: 'プロフィール')
       expect(page).to have_css('.user-name', text: 'user8')
@@ -54,43 +55,19 @@ feature 'Userページ' do
   context 'ログイン後' do
     include_context 'ユーザーとしてログインしている'
 
-    let!(:other_user) { create(:user, name: 'other user') }
-
-    scenario 'ログイン直後はユーザ詳細ページが表示されること' do
-      expect(page).to have_css('h2', text: 'プロフィール')
-      expect(page).to have_css('.user-name', text: current_user.name)
-      expect(page).to have_css('.user-profile', text: current_user.profile)
-    end
-
-    scenario '自分のプロフィール編集画面に遷移し、他の人の編集ページに遷移しようとするとTOPに遷移すること' do
-
-      click_on 'プロフィールを編集する'
-
-      expect(page).to have_css('h2', text: 'プロフィール編集')
-
-      click_link 'Users'
-
-      click_link 'other user'
-
-      expect(page).not_to have_css('.btn.btn-default', text: 'プロフィール編集')
-
-      visit edit_user_path(other_user)
-      expect(page).to have_css('.navbar-brand', text: 'Isetan')
-    end
-
-    context 'ユーザ編集ページ' do
+    context 'プロフィール編集ページ' do
       background do
-        visit edit_user_path(current_user)
+        visit edit_mypage_profile_path(current_user)
       end
 
       scenario 'ユーザー情報を変更すると保存されること' do
         fill_in 'user[name]', with: 'super user'
 
-        click_on '登録する'
+        click_on '更新する'
 
-        expect(page).to have_css('h2', text: 'プロフィール')
+        expect(page).to have_css('h2', text: 'ホーム')
         expect(page).to have_css('.alert-success', text: 'プロフィールを更新しました')
-        expect(page).to have_css('.user-name', text: 'super user')
+        expect(page).to have_xpath("//input[@id='user_name'][@value='super user']")
       end
 
       scenario 'ユーザ名が51文字以上の場合、画面が遷移せず、エラーメッセージが表示される' do
@@ -98,10 +75,10 @@ feature 'Userページ' do
         fill_in 'user[email]', with: 'user@example.com'
         fill_in 'user[password]', with: 'a' * 10
         fill_in 'user[password_confirmation]', with: 'a' * 10
-        click_on '登録する'
+        click_on '更新する'
 
-        expect(page).to have_css('h2', text: 'プロフィール編集')
-        expect(page).to have_css('.alert', text: 'Name is too long (maximum is 50 characters)')
+        expect(page).to have_css('h2', text: 'ホーム')
+        expect(page).to have_css('.alert', text: 'Nameは50文字以内で入力してください。')
       end
     end
   end

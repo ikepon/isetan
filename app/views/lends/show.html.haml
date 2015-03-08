@@ -1,0 +1,45 @@
+.row
+  .col-xs-12
+    %h2= @book.title
+  - flash.each do |key, value|
+    .col-xs-12(class='alert alert-#{key}')
+      = "#{value}"
+  .col-xs-12.book-box
+    .row
+      - if @collection.created_at >= 3.days.ago.beginning_of_day
+        %span.label.label-danger.tagclip New
+      .col-xs-3
+        = image_tag @book.book_cover.url, class: 'img-responsive'
+      .col-xs-9
+        .row
+          .col-xs-8
+            .rental
+              レンタル回数：
+              = @collection.rental
+            .status
+              - status = @collection.status
+              - if status == 'reservable'
+                = "貸出状況：" + t("collections.#{status}")
+              - else
+                .returned_at= "返却日：#{@collection.returned_at}"
+            -# TODO 欲しい機能の実装
+              .wanted
+                欲しい：
+                = @book.wanted
+          .col-xs-4
+            - if signed_in?
+              - if status == 'reservable'
+                = link_to '本を借りる', [:edit_mypage, @collection], class: 'btn btn-default'
+              - else
+                .collection-status.label.label-info 貸出中
+            - else
+              = link_to '本を借りる', login_path, class: 'btn btn-default'
+        - if @collection.borrower_id.present?
+          .borrower
+            レンタルユーザー
+            - if @collection.borrower.image?
+              = image_tag @collection.borrower.image.thumb.url, class: 'img-responsive', alt: @collection.borrower.name, title: @collection.borrower.name
+            - else
+              = image_tag 'noimage.jpg', class: 'img-responsive', title: @collection.borrower.name
+      .col-xs-12
+        = link_to '本の貸出一覧に戻る', lends_path, class: 'btn btn-default return-btn'

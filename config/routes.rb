@@ -6,22 +6,36 @@ Rails.application.routes.draw do
 
   resources :users, only: %i(index show new create edit update)
 
-  resources :news, only: %i(index show new create)
+  namespace :mypage do
+    root to: 'profile#edit'
+    resources :profile, only: %i(edit update), controller: :profile
 
-  resources :books, only: %i(index show create) do
-    collection do
-      post :confirm
+    resources :books, only: %i(create)
+
+    match 'collections/new', via: 'post'
+    resources :collections, only: %i(index show new create edit) do
+      collection do
+        post :confirm
+      end
+
+      member do
+        patch :rend
+        patch :return
+      end
     end
+
+    resources :lends, only: %i(index)
+
+    resources :reviews, only: %i(index show new create edit update)
   end
 
-  match 'collections/new', via: 'post'
-  resources :collections, only: %i(index show new create) do
-    collection do
-      post :confirm
-    end
-  end
+  resources :news, only: %i(index show)
 
-  resources :reviews
+  resources :books, only: %i(index show)
+
+  resources :reviews, only: %i(index show)
+
+  resources :lends, only: %i(index show)
 
   resources :contacts, only: %i(new create) do
     collection do

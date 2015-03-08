@@ -17,6 +17,18 @@
 .contents-area {
   .book-box {
     margin-bottom: 40px;
+    .user-images {
+      padding: 7px;
+      img {
+        height: 40px;
+      }
+    }
+    .returned_at {
+      color: red;
+    }
+    .rend, .return-btn, .borrower {
+      margin-top: 15px;
+    }
   }
   h2 {
     margin-top: 0px;
@@ -33,14 +45,6 @@
     margin: -10px 0 -20px 0px;
     font-size: 20px;
   }
-  .book-box {
-    .user-images {
-      padding: 7px;
-      img {
-        height: 40px;
-      }
-    }
-  }
 }
 
 .required {
@@ -56,9 +60,32 @@
   }
 }
 
+// news
+.news-content {
+  margin-bottom: 30px;
+}
+
 // reviews
 .btn-area {
   margin-top: 15px;
+}
+
+// users
+.profile-image{
+    width: 70px;
+    height: 70px;
+    border: solid 1px #ccc;
+    display:table;
+    text-align: center;
+}
+.profile-image > *{
+    display:table-cell;
+    vertical-align: middle;
+}
+
+// collections
+.collection-status {
+  font-size: 18px;
 }
 
 // footer

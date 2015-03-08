@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:session][:password])
       sign_in user
-      flash[:success] = "Welcome to isetan"
-      redirect_back_or user
+      flash[:success] = "isetan へようこそ！"
+      redirect_back_or mypage_root_url
     else
       flash.now[:danger] = 'メールアドレス、パスワードの組み合わせに誤りがあります。'
       render 'new'

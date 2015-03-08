@@ -1,4 +1,7 @@
 .row
+  - flash.each do |key, value|
+    %div(class='alert alert-#{key}')
+      = "#{value}"
   .col-xs-12
     %h2= @collection.book.title
   .col-xs-3

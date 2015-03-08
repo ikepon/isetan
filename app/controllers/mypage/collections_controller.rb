@@ -1,6 +1,10 @@
-class CollectionsController < ApplicationController
+class Mypage::CollectionsController < ApplicationController
+  before_action :signed_in_user
+
+  layout 'mypage'
+
   def index
-    @collections = Collection.all
+    @collections = current_user.collections.order(created_at: :desc)
   end
 
   def show
@@ -51,7 +55,8 @@ class CollectionsController < ApplicationController
     elsif collection_book
       @collection = Collection.new(user_id: current_user.id, book_id: collection_book.id)
     else
-      render 'books/confirm' and return
+      # Book に登録がない場合はCollectionと合わせて登録している
+      render 'mypage/books/confirm' and return
     end
   end
 
@@ -59,15 +64,49 @@ class CollectionsController < ApplicationController
     collection = Collection.new(collection_params)
     if collection.save
       flash[:success] = '蔵書登録しました'
-      redirect_to book_path(collection.book_id)
+      redirect_to mypage_collection_path(collection)
     else
       render 'new'
+    end
+  end
+
+  def edit
+    @collection = Collection.find(params[:id])
+  end
+
+  def rend
+    @collection = Collection.find(params[:id])
+    @collection.status = 'rented'
+    @collection.rental += 1
+    @collection.rented_at = Time.zone.now
+    @collection.borrower_id = current_user.id
+
+    if @collection.update_attributes(collection_params)
+      flash[:success] = "本の貸出が完了しました。返却日は#{@collection.returned_at}です。"
+      redirect_to lend_path(@collection)
+    else
+      render :edit
+    end
+  end
+
+  def return
+    @collection = Collection.find(params[:id])
+    @collection.status = 'reservable'
+    @collection.rented_at = ''
+    @collection.returned_at = ''
+    @collection.borrower_id = ''
+
+    if @collection.save
+      flash[:success] = "本を返却処理が完了しました。"
+      redirect_to mypage_lends_path
+    else
+      render :edit
     end
   end
 
   private
 
   def collection_params
-    params.require(:collection).permit(:user_id, :book_id)
+    params.require(:collection).permit(:status, :rented_at, :returned_at, :user_id, :book_id, :rental, :borrower_id)
   end
 end

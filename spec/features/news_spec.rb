@@ -29,7 +29,7 @@ feature 'Newsページ' do
         expect(page).not_to have_css('h3', text: 'News')
       end
 
-      click_link '蔵書'
+      click_link 'みんなの蔵書'
 
       within '#sidebar' do
         expect(page).not_to have_css('h3', text: 'News')
@@ -71,7 +71,7 @@ feature 'Newsページ' do
       click_link news1.title
 
       expect(page).to have_css('h2', text: news1.title)
-      expect(page).to have_css('.news-date', text: news1.created_at.to_formatted_s(:date))
+      expect(page).to have_css('span.small', text: news1.created_at.to_formatted_s(:date))
       expect(page).to have_css('.news-content', text: news1.content)
 
       click_link 'ニュース一覧に戻る'

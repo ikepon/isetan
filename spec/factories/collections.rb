@@ -7,6 +7,7 @@ FactoryGirl.define do
     trait :collection_whatever do
       user { create(:user) }
       book { create(:book) }
+      borrower { create(:user)}
     end
   end
 end

@@ -1,0 +1,39 @@
+.row
+  .col-xs-12
+    - flash.each do |key, value|
+      %div(class='alert alert-#{key}')
+        = "#{value}"
+    %h2 ホーム
+    .text-right.help-block
+      %span.required> ＊
+      は必須です
+    = render 'shared/error_messages'
+    = form_for @user, url: mypage_profile_path(@user) do |f|
+      .form-group
+        = f.label :name
+        %span.required ＊
+        = f.text_field :name, class: 'form-control', required: true, placeholder: '山田 太郎'
+      .form-group
+        = f.label :email
+        %span.required ＊
+        = f.text_field :email, class: 'form-control', required: true, placeholder: 'user@example.com'
+      .form-group
+        = f.label :password
+        - if params[:action] == 'new'
+          %span.required ＊
+        = f.password_field :password, class: 'form-control', required: params[:action] == 'new' ? true : false
+      .form-group
+        = f.label :password_confirmation, "Confirmation"
+        - if params[:action] == 'new'
+          %span.required ＊
+        = f.password_field :password_confirmation, class: 'form-control', required: params[:action] == 'new' ? true : false
+      .form-group
+        = f.label :image
+        = image_tag @user.image.thumb.url if @user.image?
+        = f.file_field :image
+        = f.hidden_field :image_cache
+        %p.help-block ※アップロードするファイルはjpg,jpeg,gif,pngのいずれかにしてください。
+      .form-group
+        = f.label :profile
+        = f.text_area :profile, class: 'form-control', placeholder: '普段は技術書を読んでいますが、ビジネス系の本も興味があります。'
+      = f.submit '更新する', class: 'btn btn-default'

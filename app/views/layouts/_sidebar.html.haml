@@ -7,3 +7,29 @@
         %span.news-title= link_to news.title, news_path(news)
     %p.text-right
       = link_to 'News一覧へ', news_index_path
+- unless @review_page
+  .reviews
+    %h3.content-tile 読書感想
+    - if @sidebar_reviews
+      - @sidebar_reviews.each do |review|
+        %p
+          -# TODO うまくユーザーを表示したい
+          %span.review-date= review.created_at.to_formatted_s(:date)
+          %span.review-title= link_to review.title, review_path(review)
+      %p.text-right
+        = link_to '感想一覧へ', reviews_path
+    - else
+      %p 感想の投稿はまだありません。
+- unless @book_page
+  .collections
+    %h3.content-tile 蔵書
+    - if @sidebar_collections
+      - @sidebar_collections.each do |collection|
+        %p
+          -# TODO うまくユーザーを表示したい
+          %span.collection-date= collection.created_at.to_formatted_s(:date)
+          %span.collection-title= link_to collection.book.title, book_path(collection.book_id)
+      %p.text-right
+        = link_to '蔵書一覧へ', books_path
+    - else
+      %p 蔵書の登録はまだありません。
