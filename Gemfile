@@ -26,6 +26,9 @@ gem 'eventmachine', github: 'eventmachine/eventmachine', branch: :master
 gem 'carrierwave'
 gem 'rmagick'
 
+# errbitとの連携
+gem 'airbrake'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
